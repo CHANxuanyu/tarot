@@ -1,0 +1,18 @@
+{
+  "spreads": [
+    {
+      "id": "hexagram",
+      "name": "Six Lines",
+      "nameZh": "六爻",
+      "positions": 6,
+      "layout": [
+        { "label": "Line 1", "labelZh": "初爻", "x": 0, "y": 5 },
+        { "label": "Line 2", "labelZh": "二爻", "x": 0, "y": 4 },
+        { "label": "Line 3", "labelZh": "三爻", "x": 0, "y": 3 },
+        { "label": "Line 4", "labelZh": "四爻", "x": 0, "y": 2 },
+        { "label": "Line 5", "labelZh": "五爻", "x": 0, "y": 1 },
+        { "label": "Line 6", "labelZh": "上爻", "x": 0, "y": 0 }
+      ]
+    }
+  ]
+}

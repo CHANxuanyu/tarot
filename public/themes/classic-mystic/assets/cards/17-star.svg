@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="320" rx="12" fill="url(#cardBg)" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="8" fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="30" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" fill="#6b3fa0" font-weight="bold">XVII - THE STAR</text>
+  
+  <!-- Large Eight-Pointed Star -->
+  <g transform="translate(100, 150)">
+    <path d="M 0,-45 L -10,-13 L -42,-13 L -18,5 L -28,37 L 0,19 L 28,37 L 18,5 L 42,-13 L 10,-13 Z" 
+          fill="none" stroke="#6b3fa0" stroke-width="2.5" stroke-linejoin="miter"/>
+    <path d="M 0,-45 L 0,0 M -42,-13 L 0,0 M -28,37 L 0,0 M 28,37 L 0,0 M 42,-13 L 0,0" 
+          stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+    <circle cx="0" cy="0" r="5" fill="#d4af37" stroke="#6b3fa0" stroke-width="1.5"/>
+    
+    <!-- Smaller Stars Around -->
+    <g opacity="0.7">
+      <path d="M -60,-30 L -58,-22 L -50,-22 L -56,-17 L -54,-9 L -60,-14 L -66,-9 L -64,-17 L -70,-22 L -62,-22 Z" 
+            fill="#6b3fa0"/>
+      <path d="M 60,-35 L 62,-27 L 70,-27 L 64,-22 L 66,-14 L 60,-19 L 54,-14 L 56,-22 L 50,-27 L 58,-27 Z" 
+            fill="#6b3fa0"/>
+      <path d="M -55,50 L -53,58 L -45,58 L -51,63 L -49,71 L -55,66 L -61,71 L -59,63 L -65,58 L -57,58 Z" 
+            fill="#6b3fa0"/>
+      <path d="M 55,45 L 57,53 L 65,53 L 59,58 L 61,66 L 55,61 L 49,66 L 51,58 L 45,53 L 53,53 Z" 
+            fill="#6b3fa0"/>
+      <path d="M 0,-75 L 2,-67 L 10,-67 L 4,-62 L 6,-54 L 0,-59 L -6,-54 L -4,-62 L -10,-67 L -2,-67 Z" 
+            fill="#6b3fa0"/>
+      <path d="M -35,70 L -33,78 L -25,78 L -31,83 L -29,91 L -35,86 L -41,91 L -39,83 L -45,78 L -37,78 Z" 
+            fill="#6b3fa0"/>
+      <path d="M 35,70 L 37,78 L 45,78 L 39,83 L 41,91 L 35,86 L 29,91 L 31,83 L 25,78 L 33,78 Z" 
+            fill="#6b3fa0"/>
+    </g>
+  </g>
+  
+  <text x="100" y="295" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Hope · Faith</text>
+  <text x="100" y="307" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Renewal</text>
+</svg>

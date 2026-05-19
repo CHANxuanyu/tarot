@@ -1,0 +1,1092 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #1a0f2e;
+  --color-bg-secondary: #2d1b4e;
+  --color-gold: #d4af37;
+  --color-gold-light: #f0d060;
+  --color-parchment: #f4e4bc;
+  --color-purple: #6b3fa0;
+  --color-purple-light: #9b6fd0;
+  --color-text: #f4e4bc;
+  --color-text-muted: #a89cc0;
+  --color-card-back: #2d1b4e;
+  --color-card-border: #d4af37;
+  --color-shadow: rgba(212, 175, 55, 0.3);
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Crimson Pro', serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(ellipse at 50% 20%, var(--color-bg-secondary) 0%, var(--color-bg) 70%);
+}
+
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  position: relative;
+  width: 100%;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--color-gold);
+  text-shadow: 0 0 20px var(--color-shadow);
+  letter-spacing: 0.15em;
+}
+
+.app-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+.controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control-btn {
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.control-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  padding: 1rem;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  animation: fade-in 0.4s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.prompt {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.action-btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  background: transparent;
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover:not(:disabled) {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  box-shadow: 0 0 20px var(--color-shadow);
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =============================================
+   SHUFFLE STAGE - Deck area with phases
+   ============================================= */
+.deck-area {
+  position: relative;
+  width: 300px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck-card {
+  position: absolute;
+  width: 120px;
+  height: 192px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.deck-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Idle: stacked pile */
+.deck-idle .deck-card {
+  transform: translate(
+    calc(var(--card-index) * 2px),
+    calc(var(--card-index) * 2px)
+  ) rotate(calc((var(--card-index) - 3) * 1.5deg));
+}
+
+/* Fanning: spread into arc */
+.deck-fanning .deck-card {
+  transform: rotate(calc((var(--card-index) - 3) * 8deg))
+    translateY(-20px);
+  transform-origin: center 300px;
+}
+
+/* Scattering: random positions */
+.deck-scattering .deck-card:nth-child(1) { transform: translate(-80px, -30px) rotate(-15deg); }
+.deck-scattering .deck-card:nth-child(2) { transform: translate(60px, -50px) rotate(12deg); }
+.deck-scattering .deck-card:nth-child(3) { transform: translate(-40px, 40px) rotate(-8deg); }
+.deck-scattering .deck-card:nth-child(4) { transform: translate(80px, 20px) rotate(18deg); }
+.deck-scattering .deck-card:nth-child(5) { transform: translate(-60px, -10px) rotate(-22deg); }
+.deck-scattering .deck-card:nth-child(6) { transform: translate(30px, 50px) rotate(7deg); }
+.deck-scattering .deck-card:nth-child(7) { transform: translate(-20px, -60px) rotate(-5deg); }
+
+/* Gathering: collapse back */
+.deck-gathering .deck-card {
+  transform: translate(0, 0) rotate(0deg) scale(0.9);
+  opacity: 0.7;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================
+   CARD COMPONENT - Flip mechanics
+   ============================================= */
+.card-slot {
+  cursor: pointer;
+  text-align: center;
+}
+
+.card-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.card-container {
+  width: 140px;
+  height: 224px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-container.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-container.reversed.flipped .card-inner {
+  transform: rotateY(180deg) rotate(180deg);
+}
+
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--color-shadow);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-back {
+  background: var(--color-card-back);
+  border: 2px solid var(--color-card-border);
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  background: var(--color-parchment);
+  border: 2px solid var(--color-card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-placeholder {
+  font-size: 3rem;
+  color: var(--color-purple);
+}
+
+/* =============================================
+   SPREAD STAGE - Card selection
+   ============================================= */
+.spread-stage {
+  gap: 2.5rem;
+}
+
+.spread-layout {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.spread-layout .card-slot {
+  transition: transform 0.3s ease;
+}
+
+.spread-layout .card-slot:hover {
+  transform: translateY(-8px);
+}
+
+.spread-layout .card-slot:nth-child(1) { animation: card-deal 0.4s ease backwards; animation-delay: 0s; }
+.spread-layout .card-slot:nth-child(2) { animation: card-deal 0.4s ease backwards; animation-delay: 0.15s; }
+.spread-layout .card-slot:nth-child(3) { animation: card-deal 0.4s ease backwards; animation-delay: 0.3s; }
+
+@keyframes card-deal {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =============================================
+   RESULT STAGE
+   ============================================= */
+.result-stage {
+  gap: 2rem;
+}
+
+.result-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  text-align: center;
+  animation: title-reveal 0.6s ease backwards;
+}
+
+@keyframes title-reveal {
+  from { opacity: 0; letter-spacing: 0.5em; }
+  to { opacity: 1; letter-spacing: 0.05em; }
+}
+
+.result-cards {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.result-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 240px;
+  animation: result-card-appear 0.5s ease backwards;
+}
+
+.result-card-item:nth-child(1) { animation-delay: 0.1s; }
+.result-card-item:nth-child(2) { animation-delay: 0.3s; }
+.result-card-item:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes result-card-appear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card-header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.result-position {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.result-orientation {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.result-card-img {
+  width: 130px;
+  height: 208px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 6px 24px var(--color-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result-card-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px var(--color-shadow);
+}
+
+.result-card-img.reversed {
+  transform: rotate(180deg);
+}
+
+.result-card-img.reversed:hover {
+  transform: rotate(180deg) scale(1.05);
+}
+
+.result-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.result-card-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-gold-light);
+  text-align: center;
+}
+
+.result-interpretation {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 600px) {
+  .app-title { font-size: 1.5rem; }
+  .deck-area { width: 240px; height: 200px; }
+  .deck-card { width: 100px; height: 160px; }
+  .card-container { width: 110px; height: 176px; }
+  .spread-layout { gap: 1rem; }
+  .result-cards { gap: 1.5rem; }
+  .result-card-img { width: 100px; height: 160px; }
+  .result-card-item { max-width: 160px; }
+}
+
+/* =============================================
+   RESULT ACTIONS
+   ============================================= */
+.result-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* =============================================
+   LIGHT MODE
+   ============================================= */
+.app.light {
+  --color-bg: #f8f4ee;
+  --color-bg-secondary: #ede6da;
+  --color-text: #2d1b4e;
+  --color-text-muted: #6b5a80;
+  --color-card-back: #ede6da;
+  --color-shadow: rgba(107, 63, 160, 0.2);
+  background: radial-gradient(ellipse at 50% 20%, var(--color-bg-secondary) 0%, var(--color-bg) 70%);
+}
+
+.app.light .app-title {
+  text-shadow: none;
+}
+
+.app.light .card-back {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-gold);
+}
+
+/* =============================================
+   HISTORY DRAWER
+   ============================================= */
+.history-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.history-toggle:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+
+.history-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+  animation: fade-in 0.2s ease;
+}
+
+.history-drawer {
+  width: 320px;
+  max-width: 85vw;
+  height: 100%;
+  background: var(--color-bg);
+  border-left: 2px solid var(--color-gold);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  animation: slide-in-right 0.3s ease;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-header h3 {
+  font-family: var(--font-display);
+  color: var(--color-gold);
+  font-size: 1.1rem;
+}
+
+.history-empty {
+  color: var(--color-text-muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.history-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow-y: auto;
+}
+
+.history-item {
+  padding: 0.8rem;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.history-cards-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.history-card-tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--color-gold-light);
+  font-family: var(--font-body);
+}
+
+.history-clear {
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  margin-top: auto;
+}
+
+/* =============================================
+   LOADING SPLASH
+   ============================================= */
+.loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+.loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-symbol {
+  font-size: 3rem;
+  color: var(--color-gold);
+  animation: loading-spin 2s linear infinite;
+}
+
+@keyframes loading-spin {
+  0% { transform: rotate(0deg); opacity: 0.5; }
+  50% { transform: rotate(180deg); opacity: 1; }
+  100% { transform: rotate(360deg); opacity: 0.5; }
+}
+
+.loading-text {
+  font-family: var(--font-display);
+  color: var(--color-gold);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* =============================================
+   MODE SELECTOR
+   ============================================= */
+.mode-selector {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.mode-option {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.mode-option.active {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+
+.mode-option:hover:not(.active) {
+  color: var(--color-gold);
+}
+
+/* =============================================
+   ERROR BOUNDARY
+   ============================================= */
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-boundary h2 {
+  font-family: var(--font-display);
+  color: var(--color-gold);
+}
+
+.error-boundary p {
+  color: var(--color-text-muted);
+  max-width: 400px;
+}
+
+/* =============================================
+   ACCESSIBILITY - Focus styles
+   ============================================= */
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.card-slot:focus-visible .card-container {
+  box-shadow: 0 0 0 3px var(--color-gold);
+  border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .starfield { display: none; }
+}
+
+/* =============================================
+   STARFIELD CANVAS
+   ============================================= */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.app > *:not(.starfield) {
+  position: relative;
+  z-index: 1;
+}
+
+/* =============================================
+   QUESTION INPUT
+   ============================================= */
+.question-input-wrapper {
+  width: 100%;
+  max-width: 360px;
+}
+
+.question-input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.question-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.question-input:focus {
+  border-color: var(--color-gold-light);
+  box-shadow: 0 0 12px var(--color-shadow);
+}
+
+.question-input:disabled {
+  opacity: 0.4;
+}
+
+.result-question {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+  animation: fade-in 0.5s ease;
+}
+
+/* =============================================
+   SYNTHESIS SECTION
+   ============================================= */
+.result-synthesis {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  background: rgba(45, 27, 78, 0.3);
+  text-align: center;
+  animation: result-card-appear 0.6s ease backwards;
+  animation-delay: 0.8s;
+}
+
+.synthesis-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-gold);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.synthesis-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.8;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* =============================================
+   I CHING - COIN TOSS
+   ============================================= */
+.coin-toss-group {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.coin {
+  width: 70px;
+  height: 70px;
+  perspective: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.coin-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.coin-spinning .coin-inner {
+  animation: coin-flip 1s ease-in-out;
+}
+
+@keyframes coin-flip {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(1080deg); }
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coin-face img {
+  width: 100%;
+  height: 100%;
+}
+
+.coin-back-face {
+  transform: rotateX(180deg);
+}
+
+.coin-label {
+  font-size: 0.7rem;
+  color: var(--color-gold);
+  font-family: var(--font-display);
+}
+
+/* =============================================
+   I CHING - CASTING STAGE
+   ============================================= */
+.casting-stage {
+  gap: 1.5rem;
+}
+
+.casting-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.yao-stack {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.yao-line {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  animation: yao-appear 0.3s ease;
+}
+
+@keyframes yao-appear {
+  from { opacity: 0; transform: scaleX(0.5); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+.yao-yang {
+  width: 100px;
+  height: 10px;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+.yao-yin {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.yao-yin-half {
+  width: 42px;
+  height: 10px;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+.yao-yin-gap {
+  width: 12px;
+}
+
+.yao-change-mark {
+  font-size: 0.7rem;
+  color: #c8372d;
+  margin-left: 0.3rem;
+}
+
+.yao-line.changing .yao-yang,
+.yao-line.changing .yao-yin-half {
+  background: #c8372d;
+}
+
+/* =============================================
+   I CHING - HEXAGRAM RESULT
+   ============================================= */
+.hexagram-result {
+  gap: 1.5rem;
+}
+
+.hexagram-display {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hexagram-primary,
+.hexagram-changed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hexagram-arrow {
+  font-size: 1.5rem;
+  color: var(--color-gold);
+}
+
+.hexagram-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.hexagram-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+.hexagram-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hex-line {
+  display: flex;
+  justify-content: center;
+}
+
+.hex-yang {
+  width: 80px;
+  height: 8px;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+.hex-yin {
+  display: flex;
+  gap: 10px;
+}
+
+.hex-yin-half {
+  width: 34px;
+  height: 8px;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+.hex-line.changing .hex-yang,
+.hex-line.changing .hex-yin-half {
+  background: #c8372d;
+}
+
+.hexagram-info {
+  text-align: center;
+}
+
+.hexagram-char {
+  font-size: 2.5rem;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.hexagram-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-gold);
+  margin-top: 0.3rem;
+}
+
+.hexagram-reading {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.reading-section {
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(200, 168, 75, 0.2);
+  border-radius: 8px;
+  background: rgba(26, 47, 42, 0.4);
+}
+
+.reading-section h3 {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.reading-section p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.line-reading {
+  margin-top: 0.4rem;
+}
+
+.line-reading strong {
+  color: #c8372d;
+}

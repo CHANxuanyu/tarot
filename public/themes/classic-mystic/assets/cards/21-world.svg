@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="320" rx="12" fill="url(#cardBg)" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="8" fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="30" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" fill="#6b3fa0" font-weight="bold">XXI - THE WORLD</text>
+  
+  <!-- Central Wreath/Circle -->
+  <g transform="translate(100, 155)">
+    <ellipse cx="0" cy="0" rx="45" ry="55" fill="none" stroke="#6b3fa0" stroke-width="2.5"/>
+    
+    <!-- Laurel leaves pattern -->
+    <g opacity="0.6" stroke="#6b3fa0" stroke-width="1.5" fill="none">
+      <path d="M -45,0 Q -40,8 -35,10"/>
+      <path d="M -45,0 Q -40,-8 -35,-10"/>
+      <path d="M -40,20 Q -35,25 -30,25"/>
+      <path d="M -40,-20 Q -35,-25 -30,-25"/>
+      <path d="M -30,35 Q -25,38 -18,40"/>
+      <path d="M -30,-35 Q -25,-38 -18,-40"/>
+      <path d="M -15,45 Q -8,47 0,48"/>
+      <path d="M -15,-45 Q -8,-47 0,-48"/>
+      
+      <path d="M 45,0 Q 40,8 35,10"/>
+      <path d="M 45,0 Q 40,-8 35,-10"/>
+      <path d="M 40,20 Q 35,25 30,25"/>
+      <path d="M 40,-20 Q 35,-25 30,-25"/>
+      <path d="M 30,35 Q 25,38 18,40"/>
+      <path d="M 30,-35 Q 25,-38 18,-40"/>
+      <path d="M 15,45 Q 8,47 0,48"/>
+      <path d="M 15,-45 Q 8,-47 0,-48"/>
+    </g>
+    
+    <!-- Ribbon ties at top and bottom -->
+    <path d="M -8,-55 L 0,-58 L 8,-55 L 0,-52 Z" fill="#d4af37" stroke="#6b3fa0" stroke-width="1"/>
+    <path d="M -8,55 L 0,58 L 8,55 L 0,52 Z" fill="#d4af37" stroke="#6b3fa0" stroke-width="1"/>
+  </g>
+  
+  <!-- Four Corner Elements -->
+  <!-- Top-left: Angel (human face with wings) -->
+  <g transform="translate(40, 80)">
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+    <circle cx="-3" cy="-2" r="1.5" fill="#6b3fa0"/>
+    <circle cx="3" cy="-2" r="1.5" fill="#6b3fa0"/>
+    <path d="M -3,3 Q 0,5 3,3" stroke="#6b3fa0" stroke-width="1" fill="none"/>
+    <path d="M -15,-5 Q -12,-8 -10,-5" fill="none" stroke="#6b3fa0" stroke-width="1.5"/>
+    <path d="M 15,-5 Q 12,-8 10,-5" fill="none" stroke="#6b3fa0" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Top-right: Eagle -->
+  <g transform="translate(160, 80)">
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+    <path d="M -4,-3 L -2,-5 L 0,-3" stroke="#6b3fa0" stroke-width="1.5" fill="none"/>
+    <circle cx="-3" cy="-1" r="1.5" fill="#6b3fa0"/>
+    <circle cx="3" cy="-1" r="1.5" fill="#6b3fa0"/>
+    <path d="M -12,0 L -6,0 M 6,0 L 12,0" stroke="#6b3fa0" stroke-width="2"/>
+    <path d="M -10,5 L -8,8 M 10,5 L 8,8" stroke="#6b3fa0" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Bottom-left: Lion -->
+  <g transform="translate(40, 230)">
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+    <circle cx="-3" cy="-2" r="1.5" fill="#6b3fa0"/>
+    <circle cx="3" cy="-2" r="1.5" fill="#6b3fa0"/>
+    <path d="M -2,2 L 0,5 L 2,2" stroke="#6b3fa0" stroke-width="1.5" fill="#6b3fa0"/>
+    <!-- Mane -->
+    <g opacity="0.7">
+      <line x1="-8" y1="-8" x2="-11" y2="-11" stroke="#6b3fa0" stroke-width="1.5"/>
+      <line x1="8" y1="-8" x2="11" y2="-11" stroke="#6b3fa0" stroke-width="1.5"/>
+      <line x1="-10" y1="0" x2="-13" y2="0" stroke="#6b3fa0" stroke-width="1.5"/>
+      <line x1="10" y1="0" x2="13" y2="0" stroke="#6b3fa0" stroke-width="1.5"/>
+    </g>
+  </g>
+  
+  <!-- Bottom-right: Bull/Ox -->
+  <g transform="translate(160, 230)">
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+    <circle cx="-3" cy="-1" r="1.5" fill="#6b3fa0"/>
+    <circle cx="3" cy="-1" r="1.5" fill="#6b3fa0"/>
+    <ellipse cx="0" cy="4" rx="2" ry="3" fill="none" stroke="#6b3fa0" stroke-width="1"/>
+    <!-- Horns -->
+    <path d="M -8,-8 Q -10,-12 -8,-15" stroke="#6b3fa0" stroke-width="2" fill="none"/>
+    <path d="M 8,-8 Q 10,-12 8,-15" stroke="#6b3fa0" stroke-width="2" fill="none"/>
+  </g>
+  
+  <text x="100" y="295" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Completion · Integration</text>
+  <text x="100" y="307" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Accomplishment</text>
+</svg>

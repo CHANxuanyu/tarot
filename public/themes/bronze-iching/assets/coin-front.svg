@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <radialGradient id="coinGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" style="stop-color:#e8c860"/>
+      <stop offset="60%" style="stop-color:#c8a84b"/>
+      <stop offset="100%" style="stop-color:#8a6820"/>
+    </radialGradient>
+    <filter id="coinShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#coinGrad)" stroke="#8a6820" stroke-width="3" filter="url(#coinShadow)"/>
+  <circle cx="60" cy="60" r="48" fill="none" stroke="#a08840" stroke-width="1.5"/>
+  <rect x="50" y="50" width="20" height="20" fill="#0f1f1a" stroke="#8a6820" stroke-width="2"/>
+  <text x="60" y="38" text-anchor="middle" font-family="serif" font-size="18" fill="#4a3010" font-weight="bold">開</text>
+  <text x="35" y="65" text-anchor="middle" font-family="serif" font-size="12" fill="#4a3010">元</text>
+  <text x="85" y="65" text-anchor="middle" font-family="serif" font-size="12" fill="#4a3010">通</text>
+  <text x="60" y="95" text-anchor="middle" font-family="serif" font-size="12" fill="#4a3010">寶</text>
+</svg>

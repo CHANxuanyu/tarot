@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="320" rx="12" fill="url(#cardBg)" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="8" fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="30" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" fill="#6b3fa0" font-weight="bold">XIX - THE SUN</text>
+  
+  <!-- Sun with Face -->
+  <g transform="translate(100, 120)">
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+    
+    <!-- Sun Rays -->
+    <g stroke="#d4af37" stroke-width="2.5">
+      <line x1="0" y1="-50" x2="0" y2="-60"/>
+      <line x1="35.4" y1="-35.4" x2="42.4" y2="-42.4"/>
+      <line x1="50" y1="0" x2="60" y2="0"/>
+      <line x1="35.4" y1="35.4" x2="42.4" y2="42.4"/>
+      <line x1="0" y1="50" x2="0" y2="60"/>
+      <line x1="-35.4" y1="35.4" x2="-42.4" y2="42.4"/>
+      <line x1="-50" y1="0" x2="-60" y2="0"/>
+      <line x1="-35.4" y1="-35.4" x2="-42.4" y2="-42.4"/>
+    </g>
+    
+    <!-- Alternating shorter rays -->
+    <g stroke="#d4af37" stroke-width="2" opacity="0.7">
+      <line x1="25" y1="-43.3" x2="29" y2="-50"/>
+      <line x1="43.3" y1="-25" x2="50" y2="-29"/>
+      <line x1="43.3" y1="25" x2="50" y2="29"/>
+      <line x1="25" y1="43.3" x2="29" y2="50"/>
+      <line x1="-25" y1="43.3" x2="-29" y2="50"/>
+      <line x1="-43.3" y1="25" x2="-50" y2="29"/>
+      <line x1="-43.3" y1="-25" x2="-50" y2="-29"/>
+      <line x1="-25" y1="-43.3" x2="-29" y2="-50"/>
+    </g>
+    
+    <!-- Face -->
+    <circle cx="-10" cy="-8" r="3" fill="#6b3fa0"/>
+    <circle cx="10" cy="-8" r="3" fill="#6b3fa0"/>
+    <path d="M -15,8 Q 0,18 15,8" stroke="#6b3fa0" stroke-width="2" fill="none"/>
+  </g>
+  
+  <!-- Sunflowers -->
+  <g transform="translate(100, 220)">
+    <circle cx="-30" cy="0" r="12" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="-30" cy="0" r="5" fill="#6b3fa0" opacity="0.3"/>
+    <line x1="-30" y1="12" x2="-30" y2="35" stroke="#6b3fa0" stroke-width="2"/>
+    <path d="M -35,20 L -30,25 L -25,20" fill="#6b3fa0" opacity="0.5"/>
+    
+    <circle cx="0" cy="5" r="14" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+    <circle cx="0" cy="5" r="6" fill="#6b3fa0" opacity="0.3"/>
+    <line x1="0" y1="19" x2="0" y2="45" stroke="#6b3fa0" stroke-width="2.5"/>
+    <path d="M -6,25 L 0,32 L 6,25" fill="#6b3fa0" opacity="0.5"/>
+    <path d="M -8,35 L 0,38 L 8,35" fill="#6b3fa0" opacity="0.5"/>
+    
+    <circle cx="30" cy="0" r="12" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="30" cy="0" r="5" fill="#6b3fa0" opacity="0.3"/>
+    <line x1="30" y1="12" x2="30" y2="35" stroke="#6b3fa0" stroke-width="2"/>
+    <path d="M 25,20 L 30,25 L 35,20" fill="#6b3fa0" opacity="0.5"/>
+  </g>
+  
+  <text x="100" y="295" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Positivity · Fun</text>
+  <text x="100" y="307" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Warmth</text>
+</svg>

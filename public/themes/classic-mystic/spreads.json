@@ -1,0 +1,15 @@
+{
+  "spreads": [
+    {
+      "id": "three-card",
+      "name": "Three Card Spread",
+      "nameZh": "三张牌阵",
+      "positions": 3,
+      "layout": [
+        { "label": "Past", "labelZh": "过去", "x": 0, "y": 0 },
+        { "label": "Present", "labelZh": "现在", "x": 1, "y": 0 },
+        { "label": "Future", "labelZh": "未来", "x": 2, "y": 0 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "classic-mystic",
+  "name": "Classic Mystic",
+  "colors": {
+    "bg": "#0a0d0a",
+    "bgSecondary": "#1a1f1a",
+    "gold": "#c9a84c",
+    "goldLight": "#e8c860",
+    "parchment": "#f4e4bc",
+    "purple": "#4a1942",
+    "purpleLight": "#7a3070",
+    "text": "#e8dcc8",
+    "textMuted": "#9a8a6a",
+    "cardBack": "#1a1f1a",
+    "cardBorder": "#c9a84c",
+    "shadow": "rgba(201, 168, 76, 0.35)"
+  },
+  "fonts": {
+    "display": "'Cinzel Decorative', 'Cinzel', serif",
+    "body": "'Crimson Pro', serif"
+  },
+  "cardBack": "assets/back.svg"
+}

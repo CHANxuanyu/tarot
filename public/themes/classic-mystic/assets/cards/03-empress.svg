@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+    <pattern id="texture3" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.5" fill="#6b3fa0" opacity="0.05"/>
+      <circle cx="3" cy="3" r="0.5" fill="#6b3fa0" opacity="0.05"/>
+    </pattern>
+  </defs>
+  
+  <rect width="200" height="320" rx="12" fill="url(#cardBg3)"/>
+  <rect width="200" height="320" rx="12" fill="url(#texture3)"/>
+  <rect width="200" height="320" rx="12" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="10" fill="none" stroke="#6b3fa0" stroke-width="1.5" opacity="0.7"/>
+  
+  <g opacity="0.8" fill="#d4af37">
+    <path d="M 15,15 L 20,15 L 17.5,20 Z"/>
+    <path d="M 15,15 L 15,20 L 20,17.5 Z"/>
+    <path d="M 185,15 L 180,15 L 182.5,20 Z"/>
+    <path d="M 185,15 L 185,20 L 180,17.5 Z"/>
+    <path d="M 15,305 L 20,305 L 17.5,300 Z"/>
+    <path d="M 15,305 L 15,300 L 20,302.5 Z"/>
+    <path d="M 185,305 L 180,305 L 182.5,300 Z"/>
+    <path d="M 185,305 L 185,300 L 180,302.5 Z"/>
+  </g>
+  
+  <path d="M 50,25 L 150,25 L 155,35 L 150,45 L 50,45 L 45,35 Z" fill="#6b3fa0" opacity="0.15"/>
+  <text x="100" y="38" text-anchor="middle" font-family="serif" font-size="18" fill="#6b3fa0" font-weight="bold">III</text>
+  <text x="100" y="58" text-anchor="middle" font-family="serif" font-size="13" fill="#6b3fa0" font-weight="600">THE EMPRESS</text>
+  
+  <g transform="translate(100, 160)">
+    <!-- Radiant aura -->
+    <g opacity="0.25" stroke="#d4af37" stroke-width="1.5">
+      <line x1="-55" y1="-50" x2="-65" y2="-60"/>
+      <line x1="-40" y1="-60" x2="-45" y2="-70"/>
+      <line x1="0" y1="-65" x2="0" y2="-75"/>
+      <line x1="40" y1="-60" x2="45" y2="-70"/>
+      <line x1="55" y1="-50" x2="65" y2="-60"/>
+      <line x1="-65" y1="0" x2="-75" y2="0"/>
+      <line x1="65" y1="0" x2="75" y2="0"/>
+    </g>
+    
+    <!-- Crown of 12 stars -->
+    <g transform="translate(0, -70)">
+      <circle cx="0" cy="0" r="20" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.3"/>
+      <g fill="#d4af37">
+        <path d="M 0,-22 L 1,-25 L 2,-22 L 0,-20 Z"/>
+        <path d="M 10,-19 L 11,-22 L 12,-19 L 10,-17 Z"/>
+        <path d="M 17,-12 L 18,-15 L 19,-12 L 17,-10 Z"/>
+        <path d="M 20,0 L 21,-3 L 22,0 L 20,2 Z"/>
+        <path d="M 17,12 L 18,9 L 19,12 L 17,14 Z"/>
+        <path d="M 10,19 L 11,16 L 12,19 L 10,21 Z"/>
+        <path d="M 0,22 L 1,19 L 2,22 L 0,24 Z"/>
+        <path d="M -10,19 L -9,16 L -8,19 L -10,21 Z"/>
+        <path d="M -17,12 L -16,9 L -15,12 L -17,14 Z"/>
+        <path d="M -20,0 L -19,-3 L -18,0 L -20,2 Z"/>
+        <path d="M -17,-12 L -16,-15 L -15,-12 L -17,-10 Z"/>
+        <path d="M -10,-19 L -9,-22 L -8,-19 L -10,-17 Z"/>
+      </g>
+    </g>
+    
+    <!-- Empress figure -->
+    <g>
+      <!-- Head -->
+      <circle cx="0" cy="-50" r="12" fill="#f4e4bc" stroke="#6b3fa0" stroke-width="2"/>
+      <circle cx="-4" cy="-51" r="1.5" fill="#6b3fa0"/>
+      <circle cx="4" cy="-51" r="1.5" fill="#6b3fa0"/>
+      <path d="M -3,-47 Q 0,-45 3,-47" stroke="#6b3fa0" stroke-width="1.2" fill="none"/>
+      
+      <!-- Hair -->
+      <path d="M -12,-50 Q -15,-55 -12,-60 L -8,-55 L -10,-48" fill="#d4af37" opacity="0.6"/>
+      <path d="M 12,-50 Q 15,-55 12,-60 L 8,-55 L 10,-48" fill="#d4af37" opacity="0.6"/>
+      
+      <!-- Red royal robe -->
+      <path d="M -15,-38 L -25,15 L -30,45 L 30,45 L 25,15 L 15,-38 Z" 
+            fill="#c41e3a" opacity="0.7" stroke="#6b3fa0" stroke-width="2"/>
+      
+      <!-- White dress underneath -->
+      <path d="M -12,-38 L 12,-38 L 10,20 L -10,20 Z" fill="#ffffff" opacity="0.4"/>
+      
+      <!-- Heart/Venus cushion pattern -->
+      <g fill="#d4af37" opacity="0.6">
+        <circle cx="-8" cy="-20" r="3"/>
+        <circle cx="8" cy="-20" r="3"/>
+        <circle cx="-8" cy="0" r="3"/>
+        <circle cx="8" cy="0" r="3"/>
+      </g>
+      
+      <!-- Venus symbol on chest -->
+      <g transform="translate(0, -25)" stroke="#d4af37" stroke-width="2">
+        <circle cx="0" cy="-3" r="5" fill="none"/>
+        <line x1="0" y1="2" x2="0" y2="8"/>
+        <line x1="-3" y1="5" x2="3" y2="5"/>
+      </g>
+      
+      <!-- Scepter in right hand -->
+      <g transform="translate(20, -25)">
+        <line x1="0" y1="0" x2="5" y2="35" stroke="#d4af37" stroke-width="3"/>
+        <circle cx="5" cy="37" r="5" fill="#d4af37"/>
+        <circle cx="5" cy="37" r="3" fill="#ffffff"/>
+        <circle cx="5" cy="37" r="1.5" fill="#d4af37"/>
+        <path d="M 0,-3 L -3,-5 L 0,-7 L 3,-5 Z" fill="#d4af37"/>
+      </g>
+      
+      <!-- Left arm relaxed -->
+      <line x1="-15" y1="-35" x2="-20" y2="5" stroke="#f4e4bc" stroke-width="3.5"/>
+    </g>
+    
+    <!-- Wheat field -->
+    <g transform="translate(0, 50)">
+      <g fill="#d4af37" opacity="0.7">
+        <path d="M -50,0 L -48,-8 L -47,-5 L -46,-8 L -45,-3 L -44,-8 L -43,-4 L -42,-8 L -41,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M -35,0 L -33,-10 L -32,-6 L -31,-10 L -30,-4 L -29,-10 L -28,-5 L -27,-10 L -26,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M -20,0 L -18,-9 L -17,-5 L -16,-9 L -15,-3 L -14,-9 L -13,-4 L -12,-9 L -11,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M -5,0 L -3,-11 L -2,-6 L -1,-11 L 0,-4 L 1,-11 L 2,-5 L 3,-11 L 4,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M 10,0 L 12,-10 L 13,-5 L 14,-10 L 15,-3 L 16,-10 L 17,-4 L 18,-10 L 19,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M 25,0 L 27,-9 L 28,-6 L 29,-9 L 30,-4 L 31,-9 L 32,-5 L 33,-9 L 34,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M 40,0 L 42,-8 L 43,-5 L 44,-8 L 45,-3 L 46,-8 L 47,-4 L 48,-8 L 49,0" stroke="#d4af37" stroke-width="1"/>
+      </g>
+      <line x1="-55" y1="0" x2="55" y2="0" stroke="#d4af37" stroke-width="2" opacity="0.5"/>
+    </g>
+    
+    <!-- Flowing water/stream -->
+    <g transform="translate(45, 55)">
+      <path d="M 0,0 Q 5,5 10,0 Q 15,5 20,0" stroke="#4169e1" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M 0,5 Q 5,10 10,5 Q 15,10 20,5" stroke="#4169e1" stroke-width="1.5" fill="none" opacity="0.4"/>
+      <ellipse cx="10" cy="12" rx="8" ry="3" fill="#4169e1" opacity="0.2"/>
+    </g>
+    
+    <!-- Forest background -->
+    <g opacity="0.3">
+      <path d="M -60,-10 L -55,-25 L -50,-10" fill="#228b22"/>
+      <path d="M -70,0 L -65,-20 L -60,0" fill="#228b22"/>
+      <path d="M 60,-10 L 65,-25 L 70,-10" fill="#228b22"/>
+      <path d="M 50,0 L 55,-20 L 60,0" fill="#228b22"/>
+    </g>
+    
+    <!-- Decorative elements -->
+    <g fill="#d4af37" opacity="0.6">
+      <circle cx="-55" cy="-35" r="2"/>
+      <circle cx="55" cy="-35" r="2"/>
+      <circle cx="-50" cy="40" r="2"/>
+      <circle cx="35" cy="45" r="2"/>
+    </g>
+  </g>
+  
+  <path d="M 30,285 L 35,280 L 165,280 L 170,285 L 170,295 L 165,300 L 35,300 L 30,295 Z" 
+        fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="293" text-anchor="middle" font-family="serif" font-size="10" fill="#6b3fa0" opacity="0.85">
+    Abundance · Nature · Nurturing
+  </text>
+</svg>

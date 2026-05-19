@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="320" rx="12" fill="url(#cardBg)" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="8" fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="30" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" fill="#6b3fa0" font-weight="bold">XX - JUDGEMENT</text>
+  
+  <!-- Trumpet/Horn -->
+  <g transform="translate(100, 100)">
+    <path d="M -5,-40 L -5,-10 L -15,0 L -30,10 Q -35,15 -30,20 L 30,20 Q 35,15 30,10 L 15,0 L 5,-10 L 5,-40 Z" 
+          fill="none" stroke="#d4af37" stroke-width="2.5"/>
+    <line x1="-5" y1="-10" x2="5" y2="-10" stroke="#d4af37" stroke-width="2"/>
+    <line x1="-5" y1="-25" x2="5" y2="-25" stroke="#d4af37" stroke-width="2"/>
+    
+    <!-- Banner/Flag -->
+    <rect x="-3" y="-60" width="6" height="20" fill="#6b3fa0" opacity="0.3" stroke="#6b3fa0" stroke-width="1"/>
+    <path d="M 3,-55 L 25,-50 L 3,-45" fill="#6b3fa0" opacity="0.5"/>
+    
+    <!-- Cross on banner -->
+    <line x1="0" y1="-55" x2="0" y2="-45" stroke="#d4af37" stroke-width="1"/>
+    <line x1="-3" y1="-50" x2="3" y2="-50" stroke="#d4af37" stroke-width="1"/>
+  </g>
+  
+  <!-- Rising Figures -->
+  <g transform="translate(100, 180)">
+    <!-- Left Figure -->
+    <g transform="translate(-35, 20)">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+      <line x1="0" y1="8" x2="0" y2="30" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,15 L -10,25" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,15 L 10,25" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,30 L -8,45" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,30 L 8,45" stroke="#6b3fa0" stroke-width="2"/>
+      <!-- Rays above head -->
+      <line x1="-6" y1="-10" x2="-8" y2="-16" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="0" y1="-12" x2="0" y2="-18" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="6" y1="-10" x2="8" y2="-16" stroke="#d4af37" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Center Figure (slightly lower) -->
+    <g transform="translate(0, 30)">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+      <line x1="0" y1="8" x2="0" y2="30" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,15 L -10,25" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,15 L 10,25" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,30 L -8,45" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,30 L 8,45" stroke="#6b3fa0" stroke-width="2"/>
+      <!-- Rays above head -->
+      <line x1="-6" y1="-10" x2="-8" y2="-16" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="0" y1="-12" x2="0" y2="-18" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="6" y1="-10" x2="8" y2="-16" stroke="#d4af37" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Right Figure -->
+    <g transform="translate(35, 20)">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#6b3fa0" stroke-width="2"/>
+      <line x1="0" y1="8" x2="0" y2="30" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,15 L -10,25" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,15 L 10,25" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,30 L -8,45" stroke="#6b3fa0" stroke-width="2"/>
+      <path d="M 0,30 L 8,45" stroke="#6b3fa0" stroke-width="2"/>
+      <!-- Rays above head -->
+      <line x1="-6" y1="-10" x2="-8" y2="-16" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="0" y1="-12" x2="0" y2="-18" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="6" y1="-10" x2="8" y2="-16" stroke="#d4af37" stroke-width="1.5"/>
+    </g>
+  </g>
+  
+  <text x="100" y="295" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Judgement · Rebirth</text>
+  <text x="100" y="307" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Inner Calling</text>
+</svg>

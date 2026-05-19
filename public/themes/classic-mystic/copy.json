@@ -1,0 +1,40 @@
+{
+  "lang": {
+    "en": {
+      "appTitle": "Mystic Tarot",
+      "subtitle": "Unveil Your Destiny",
+      "shufflePrompt": "Focus on your question, then tap to shuffle",
+      "selectPrompt": "Choose three cards to reveal your reading",
+      "positions": ["Past", "Present", "Future"],
+      "revealButton": "Reveal",
+      "readAgain": "Read Again",
+      "interpretation": {
+        "upright": "{name} upright in {position}: A time of {keyword1} and {keyword2}. Embrace {keyword3} as your path forward.",
+        "reversed": "{name} reversed in {position}: Reflect on {keyword1}. You may be experiencing {keyword2}. Consider how {keyword3} manifests in your life."
+      },
+      "history": "History",
+      "noHistory": "No readings yet",
+      "share": "Share",
+      "darkMode": "Dark Mode",
+      "sound": "Sound"
+    },
+    "zh": {
+      "appTitle": "神秘塔罗",
+      "subtitle": "揭示你的命运",
+      "shufflePrompt": "专注于你的问题，然后点击洗牌",
+      "selectPrompt": "选择三张牌揭示你的解读",
+      "positions": ["过去", "现在", "未来"],
+      "revealButton": "揭示",
+      "readAgain": "再来一次",
+      "interpretation": {
+        "upright": "{name}正位于{position}：这是{keyword1}和{keyword2}的时刻。拥抱{keyword3}作为你前进的方向。",
+        "reversed": "{name}逆位于{position}：反思{keyword1}。你可能正在经历{keyword2}。思考{keyword3}如何在你的生活中显现。"
+      },
+      "history": "历史记录",
+      "noHistory": "暂无记录",
+      "share": "分享",
+      "darkMode": "暗色模式",
+      "sound": "声音"
+    }
+  }
+}

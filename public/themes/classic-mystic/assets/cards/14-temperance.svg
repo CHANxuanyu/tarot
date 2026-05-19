@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="320" rx="12" fill="url(#cardBg)" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="8" fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="30" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" fill="#6b3fa0" font-weight="bold">XIV - TEMPERANCE</text>
+  
+  <!-- Left chalice -->
+  <path d="M 65 145 L 70 145 L 72 165 Q 72 170 67.5 170 Q 63 170 63 165 Z" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+  <line x1="60" y1="145" x2="75" y2="145" stroke="#d4af37" stroke-width="2"/>
+  <line x1="67.5" y1="145" x2="67.5" y2="135" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- Right chalice -->
+  <path d="M 130 155 L 135 155 L 137 175 Q 137 180 132.5 180 Q 128 180 128 175 Z" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+  <line x1="125" y1="155" x2="140" y2="155" stroke="#d4af37" stroke-width="2"/>
+  <line x1="132.5" y1="155" x2="132.5" y2="145" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- Water flowing between chalices -->
+  <path d="M 72 150 Q 85 140 95 145 Q 105 150 115 148 Q 120 147 128 158" fill="none" stroke="#6b3fa0" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Water droplets -->
+  <circle cx="85" cy="142" r="1.5" fill="#6b3fa0" opacity="0.6"/>
+  <circle cx="95" cy="145" r="1.5" fill="#6b3fa0" opacity="0.6"/>
+  <circle cx="105" cy="148" r="1.5" fill="#6b3fa0" opacity="0.6"/>
+  <circle cx="115" cy="148" r="1.5" fill="#6b3fa0" opacity="0.6"/>
+  
+  <!-- Balance symbol below -->
+  <line x1="80" y1="190" x2="120" y2="190" stroke="#6b3fa0" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="100" cy="190" r="3" fill="#6b3fa0" opacity="0.5"/>
+  
+  <text x="100" y="300" text-anchor="middle" font-family="'Crimson Pro', serif" font-size="9" fill="#6b3fa0" opacity="0.8">Balance · Moderation · Patience</text>
+</svg>

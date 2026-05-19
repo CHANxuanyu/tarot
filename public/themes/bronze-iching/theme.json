@@ -1,0 +1,23 @@
+{
+  "id": "bronze-iching",
+  "name": "Bronze I Ching",
+  "colors": {
+    "bg": "#0f1f1a",
+    "bgSecondary": "#1a2f2a",
+    "gold": "#c8a84b",
+    "goldLight": "#e0c060",
+    "parchment": "#1a2f2a",
+    "purple": "#4a7c6f",
+    "purpleLight": "#6a9c8f",
+    "text": "#e8e0d0",
+    "textMuted": "#a08840",
+    "cardBack": "#1a2f2a",
+    "cardBorder": "#c8a84b",
+    "shadow": "rgba(200, 168, 75, 0.25)"
+  },
+  "fonts": {
+    "display": "'Noto Serif SC', serif",
+    "body": "'Noto Serif SC', serif"
+  },
+  "cardBack": "assets/coin-front.svg"
+}

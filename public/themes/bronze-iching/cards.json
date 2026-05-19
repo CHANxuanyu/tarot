@@ -1,0 +1,6 @@
+{
+  "deck": "iching",
+  "cards": [
+    { "id": 0, "name": "I Ching", "nameZh": "易经", "keywords": ["wisdom"], "keywordsReversed": ["change"], "image": "assets/coin-front.svg" }
+  ]
+}

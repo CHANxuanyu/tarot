@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" width="200" height="320">
+  <defs>
+    <linearGradient id="cardBg6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4e4bc"/>
+      <stop offset="100%" style="stop-color:#e8d4a0"/>
+    </linearGradient>
+    <pattern id="texture6" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.5" fill="#6b3fa0" opacity="0.05"/>
+      <circle cx="3" cy="3" r="0.5" fill="#6b3fa0" opacity="0.05"/>
+    </pattern>
+    <radialGradient id="angelGlow" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  
+  <rect width="200" height="320" rx="12" fill="url(#cardBg6)"/>
+  <rect width="200" height="320" rx="12" fill="url(#texture6)"/>
+  <rect width="200" height="320" rx="12" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <rect x="8" y="8" width="184" height="304" rx="10" fill="none" stroke="#6b3fa0" stroke-width="1.5" opacity="0.7"/>
+  
+  <g opacity="0.8" fill="#d4af37">
+    <path d="M 15,15 L 20,15 L 17.5,20 Z"/>
+    <path d="M 15,15 L 15,20 L 20,17.5 Z"/>
+    <path d="M 185,15 L 180,15 L 182.5,20 Z"/>
+    <path d="M 185,15 L 185,20 L 180,17.5 Z"/>
+    <path d="M 15,305 L 20,305 L 17.5,300 Z"/>
+    <path d="M 15,305 L 15,300 L 20,302.5 Z"/>
+    <path d="M 185,305 L 180,305 L 182.5,300 Z"/>
+    <path d="M 185,305 L 185,300 L 180,302.5 Z"/>
+  </g>
+  
+  <path d="M 50,25 L 150,25 L 155,35 L 150,45 L 50,45 L 45,35 Z" fill="#6b3fa0" opacity="0.15"/>
+  <text x="100" y="38" text-anchor="middle" font-family="serif" font-size="18" fill="#6b3fa0" font-weight="bold">VI</text>
+  <text x="100" y="58" text-anchor="middle" font-family="serif" font-size="13" fill="#6b3fa0" font-weight="600">THE LOVERS</text>
+  
+  <g transform="translate(100, 160)">
+    <!-- Divine radiance from above -->
+    <g opacity="0.25">
+      <circle cx="0" cy="-75" r="40" fill="url(#angelGlow)"/>
+      <line x1="-30" y1="-60" x2="-40" y2="-70" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="0" y1="-65" x2="0" y2="-75" stroke="#d4af37" stroke-width="1.5"/>
+      <line x1="30" y1="-60" x2="40" y2="-70" stroke="#d4af37" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Angel Raphael above -->
+    <g transform="translate(0, -65)">
+      <circle cx="0" cy="0" r="9" fill="#f4e4bc" stroke="#6b3fa0" stroke-width="1.5"/>
+      <circle cx="-2.5" cy="-1" r="1" fill="#6b3fa0"/>
+      <circle cx="2.5" cy="-1" r="1" fill="#6b3fa0"/>
+      <path d="M -1,2 Q 0,3 1,2" stroke="#6b3fa0" stroke-width="0.8" fill="none"/>
+      
+      <!-- Wings -->
+      <g fill="#d4af37" opacity="0.7">
+        <path d="M -9,-2 Q -18,-8 -22,-5 Q -20,-2 -15,0 Q -12,-1 -9,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M -9,2 Q -16,5 -18,8 Q -15,7 -12,5 Q -10,3 -9,3" stroke="#d4af37" stroke-width="1"/>
+        <path d="M 9,-2 Q 18,-8 22,-5 Q 20,-2 15,0 Q 12,-1 9,0" stroke="#d4af37" stroke-width="1"/>
+        <path d="M 9,2 Q 16,5 18,8 Q 15,7 12,5 Q 10,3 9,3" stroke="#d4af37" stroke-width="1"/>
+      </g>
+      
+      <!-- Arms blessing -->
+      <line x1="-9" y1="4" x2="-15" y2="15" stroke="#f4e4bc" stroke-width="2"/>
+      <line x1="9" y1="4" x2="15" y2="15" stroke="#f4e4bc" stroke-width="2"/>
+      <path d="M -18,15 L -15,18 L -12,15" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+      <path d="M 18,15 L 15,18 L 12,15" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+    </g>
+    
+    <!-- Sun/radiance behind angel -->
+    <circle cx="0" cy="-65" r="20" fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.4"/>
+    
+    <!-- Male figure (Adam) - left -->
+    <g transform="translate(-25, 0)">
+      <circle cx="0" cy="-25" r="9" fill="#f4e4bc" stroke="#6b3fa0" stroke-width="2"/>
+      <circle cx="-2.5" cy="-26" r="1.2" fill="#6b3fa0"/>
+      <circle cx="2.5" cy="-26" r="1.2" fill="#6b3fa0"/>
+      <path d="M -2,-22 Q 0,-21 2,-22" stroke="#6b3fa0" stroke-width="1" fill="none"/>
+      
+      <!-- Body -->
+      <path d="M -10,-16 L -14,10 L -16,35 L 16,35 L 14,10 L 10,-16 Z" 
+            fill="#6b3fa0" opacity="0.3" stroke="#6b3fa0" stroke-width="1.5"/>
+      
+      <!-- Arms -->
+      <line x1="-10" y1="-12" x2="-18" y2="5" stroke="#f4e4bc" stroke-width="3"/>
+      <line x1="10" y1="-12" x2="18" y2="5" stroke="#f4e4bc" stroke-width="3"/>
+    </g>
+    
+    <!-- Female figure (Eve) - right -->
+    <g transform="translate(25, 0)">
+      <circle cx="0" cy="-25" r="9" fill="#f4e4bc" stroke="#6b3fa0" stroke-width="2"/>
+      <circle cx="-2.5" cy="-26" r="1.2" fill="#6b3fa0"/>
+      <circle cx="2.5" cy="-26" r="1.2" fill="#6b3fa0"/>
+      <path d="M -2,-22 Q 0,-20 2,-22" stroke="#6b3fa0" stroke-width="1" fill="none"/>
+      
+      <!-- Hair -->
+      <path d="M -9,-25 Q -12,-28 -10,-32 L -7,-28" fill="#d4af37" opacity="0.5"/>
+      <path d="M 9,-25 Q 12,-28 10,-32 L 7,-28" fill="#d4af37" opacity="0.5"/>
+      
+      <!-- Body -->
+      <path d="M -10,-16 L -14,10 L -16,35 L 16,35 L 14,10 L 10,-16 Z" 
+            fill="#c41e3a" opacity="0.3" stroke="#6b3fa0" stroke-width="1.5"/>
+      
+      <!-- Arms -->
+      <line x1="-10" y1="-12" x2="-18" y2="5" stroke="#f4e4bc" stroke-width="3"/>
+      <line x1="10" y1="-12" x2="18" y2="5" stroke="#f4e4bc" stroke-width="3"/>
+    </g>
+    
+    <!-- Tree of Knowledge (behind Eve) -->
+    <g transform="translate(50, 0)">
+      <line x1="0" y1="-35" x2="0" y2="35" stroke="#6b3fa0" stroke-width="3"/>
+      <circle cx="0" cy="-35" r="15" fill="#228b22" opacity="0.4" stroke="#228b22" stroke-width="1.5"/>
+      <g fill="#c41e3a" opacity="0.7">
+        <circle cx="-8" cy="-38" r="3"/>
+        <circle cx="5" cy="-40" r="3"/>
+        <circle cx="2" cy="-33" r="3"/>
+        <circle cx="-5" cy="-30" r="3"/>
+      </g>
+      <!-- Serpent -->
+      <path d="M 5,-30 Q 8,-25 6,-20 Q 4,-15 6,-10" stroke="#6b3fa0" stroke-width="2" fill="none"/>
+      <circle cx="7" cy="-8" r="1.5" fill="#6b3fa0"/>
+    </g>
+    
+    <!-- Tree of Life (behind Adam) -->
+    <g transform="translate(-50, 0)">
+      <line x1="0" y1="-35" x2="0" y2="35" stroke="#d4af37" stroke-width="3"/>
+      <circle cx="0" cy="-35" r="15" fill="#228b22" opacity="0.4" stroke="#228b22" stroke-width="1.5"/>
+      <g fill="#d4af37" opacity="0.8">
+        <circle cx="0" cy="-42" r="2.5"/>
+        <circle cx="-7" cy="-37" r="2.5"/>
+        <circle cx="7" cy="-37" r="2.5"/>
+        <circle cx="-10" cy="-30" r="2.5"/>
+        <circle cx="0" cy="-32" r="2.5"/>
+        <circle cx="10" cy="-30" r="2.5"/>
+        <circle cx="-5" cy="-25" r="2.5"/>
+        <circle cx="5" cy="-25" r="2.5"/>
+      </g>
+    </g>
+    
+    <!-- Mountain in background -->
+    <g opacity="0.2">
+      <path d="M -70,35 L -50,-15 L -30,35" fill="#6b3fa0"/>
+      <path d="M 30,35 L 50,-15 L 70,35" fill="#6b3fa0"/>
+    </g>
+    
+    <!-- Hearts connecting them -->
+    <g opacity="0.3">
+      <path d="M -10,-5 Q -10,-15 -5,-15 Q 0,-15 0,-10 Q 0,-15 5,-15 Q 10,-15 10,-5 Q 10,5 0,15 Q -10,5 -10,-5" 
+            fill="#c41e3a" stroke="#c41e3a" stroke-width="1"/>
+    </g>
+    
+    <!-- Ground/grass -->
+    <g transform="translate(0, 45)" opacity="0.4">
+      <path d="M -60,0 Q -50,-3 -40,0 Q -30,-3 -20,0 Q -10,-3 0,0 Q 10,-3 20,0 Q 30,-3 40,0 Q 50,-3 60,0" 
+            stroke="#228b22" stroke-width="2" fill="none"/>
+    </g>
+    
+    <!-- Decorative stars -->
+    <g fill="#d4af37" opacity="0.6">
+      <path d="M -65,-50 L -63,-52 L -61,-50 L -63,-48 Z"/>
+      <path d="M 65,-50 L 67,-52 L 69,-50 L 67,-48 Z"/>
+    </g>
+  </g>
+  
+  <path d="M 30,285 L 35,280 L 165,280 L 170,285 L 170,295 L 165,300 L 35,300 L 30,295 Z" 
+        fill="none" stroke="#6b3fa0" stroke-width="1" opacity="0.4"/>
+  <text x="100" y="293" text-anchor="middle" font-family="serif" font-size="10" fill="#6b3fa0" opacity="0.85">
+    Love · Harmony · Relationships
+  </text>
+</svg>
