@@ -20,8 +20,10 @@ export function HomePage() {
   const { state, dispatch } = useDivinationContext();
 
   const handleSelectSpread = (spreadId: SpreadId) => {
-    dispatch({ type: 'SET_SPREAD', payload: spreadId });
+    const question = state.question.trim();
     dispatch({ type: 'RESET' });
+    dispatch({ type: 'SET_SPREAD', payload: spreadId });
+    dispatch({ type: 'SET_QUESTION', payload: question });
     navigate('/reading');
   };
 
