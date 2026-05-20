@@ -11,6 +11,7 @@ export type QuestionDomain =
   | 'selfGrowth';
 
 export type CardOrientation = 'upright' | 'reversed';
+export type ThreeCardPositionRole = 'past' | 'present' | 'future' | 'unknown';
 
 export type SingleCardReport = {
   domain: QuestionDomain;
@@ -33,8 +34,31 @@ export type SingleCardReport = {
   };
 };
 
+export type ThreeCardReport = {
+  domain: QuestionDomain;
+  cards: Array<{
+    positionName: string;
+    positionRole: ThreeCardPositionRole;
+    cardNameZh: string;
+    cardNameEn: string;
+    orientation: CardOrientation;
+    keywords: string[];
+    shortReading: string;
+    roleReading: string;
+  }>;
+  storyline: string;
+  hiddenReminder: string;
+  actionAdvice: string;
+  quote: string;
+};
+
 type BuildSingleCardReportInput = {
   drawn: DrawnCard;
+  question?: string;
+};
+
+type BuildThreeCardReportInput = {
+  drawnCards: DrawnCard[];
   question?: string;
 };
 
@@ -139,5 +163,114 @@ export function buildSingleCardReport({
       actionAdvice: card.actionAdvice[orientation],
       quote: card.quote[orientation],
     },
+  };
+}
+
+function getThreeCardPositionRole(positionName: string, index: number): ThreeCardPositionRole {
+  const normalized = positionName.trim().toLowerCase();
+
+  if (normalized.includes('过去') || normalized.includes('past')) return 'past';
+  if (normalized.includes('现在') || normalized.includes('当下') || normalized.includes('present')) return 'present';
+  if (normalized.includes('未来') || normalized.includes('future')) return 'future';
+
+  if (index === 0) return 'past';
+  if (index === 1) return 'present';
+  if (index === 2) return 'future';
+  return 'unknown';
+}
+
+function buildRoleReading(
+  role: ThreeCardPositionRole,
+  singleReport: SingleCardReport
+): string {
+  const cardName = singleReport.card.nameZh;
+  const keyword = singleReport.keywords[0] ?? singleReport.card.archetype;
+  const response = singleReport.sections.questionResponse;
+
+  if (role === 'past') {
+    return `作为“过去”的位置，${cardName}指出此前留下的${keyword}模式仍在影响此刻：${response}`;
+  }
+
+  if (role === 'present') {
+    return `作为“现在”的位置，${cardName}揭示当前真正需要面对的核心状态是${keyword}：${response}`;
+  }
+
+  if (role === 'future') {
+    return `作为“未来”的位置，${cardName}显示若维持当前趋势，事情可能沿着${keyword}的方向展开：${response}`;
+  }
+
+  return `${cardName}在这个位置上提示你关注${keyword}的能量：${response}`;
+}
+
+function buildThreeCardStoryline(
+  cards: ThreeCardReport['cards'],
+  domain: QuestionDomain
+): string {
+  const [past, present, future] = cards;
+  const domainContext: Record<QuestionDomain, string> = {
+    general: '这组三牌呈现的是整体能量的流动',
+    relationship: '这组三牌呈现的是关系能量的演变',
+    career: '这组三牌呈现的是事业路径的推进',
+    study: '这组三牌呈现的是学习状态的转换',
+    money: '这组三牌呈现的是资源与财务判断的变化',
+    decision: '这组三牌呈现的是选择背后的动态',
+    selfGrowth: '这组三牌呈现的是内在成长的轨迹',
+  };
+
+  if (!past || !present || !future) {
+    return `${domainContext[domain]}：牌面数量不足以形成完整的过去、现在、未来链路，请以已出现的牌位作为当前阶段提示。`;
+  }
+
+  const pastKeyword = past.keywords[0] ?? past.cardNameZh;
+  const presentKeyword = present.keywords[0] ?? present.cardNameZh;
+  const futureKeyword = future.keywords[0] ?? future.cardNameZh;
+  const reversedCount = cards.filter(card => card.orientation === 'reversed').length;
+  const flowTone = reversedCount >= 2
+    ? '这条路径并非完全顺畅，逆位能量说明你需要先修正内在阻滞，变化才会真正发生'
+    : reversedCount === 1
+      ? '这条路径中有一个关键阻点，但它也正指出最需要被调整的位置'
+      : '这条路径相对连贯，能量正在从经验沉淀走向下一阶段显化';
+
+  return `${domainContext[domain]}：过去的${past.cardNameZh}带来${pastKeyword}的背景，推动你来到现在${present.cardNameZh}所揭示的${presentKeyword}课题；如果你继续沿着当前方式行动，未来的${future.cardNameZh}会把能量带向${futureKeyword}。${flowTone}。`;
+}
+
+export function buildThreeCardReport({
+  drawnCards,
+  question = '',
+}: BuildThreeCardReportInput): ThreeCardReport {
+  const domain = detectQuestionDomain(question);
+  const singleReports = drawnCards.slice(0, 3).map(drawn => buildSingleCardReport({ drawn, question }));
+
+  const cards: ThreeCardReport['cards'] = singleReports.map((singleReport, index) => {
+    const drawn = drawnCards[index];
+    const positionName = drawn?.position || `Position ${index + 1}`;
+    const positionRole = getThreeCardPositionRole(positionName, index);
+
+    return {
+      positionName,
+      positionRole,
+      cardNameZh: singleReport.card.nameZh,
+      cardNameEn: singleReport.card.nameEn,
+      orientation: singleReport.orientation,
+      keywords: singleReport.keywords,
+      shortReading: singleReport.sections.essence,
+      roleReading: buildRoleReading(positionRole, singleReport),
+    };
+  });
+
+  const presentReport = singleReports[1] ?? singleReports[0];
+  const futureReport = singleReports[2] ?? presentReport;
+
+  return {
+    domain,
+    cards,
+    storyline: buildThreeCardStoryline(cards, domain),
+    hiddenReminder: presentReport
+      ? `这组三牌的隐藏提醒集中在“现在”：${presentReport.sections.hiddenReminder}`
+      : '这组三牌暂时缺少足够牌面形成隐藏提醒。',
+    actionAdvice: futureReport
+      ? `下一步行动可以参考未来牌给出的方向：${futureReport.sections.actionAdvice}`
+      : '请先补足牌面信息，再决定下一步行动。',
+    quote: futureReport?.sections.quote ?? presentReport?.sections.quote ?? '让牌面成为镜子，而不是替你做决定的声音。',
   };
 }
