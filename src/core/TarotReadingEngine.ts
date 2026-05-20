@@ -12,6 +12,18 @@ export type QuestionDomain =
 
 export type CardOrientation = 'upright' | 'reversed';
 export type ThreeCardPositionRole = 'past' | 'present' | 'future' | 'unknown';
+export type CelticCrossPositionRole =
+  | 'present'
+  | 'challenge'
+  | 'foundation'
+  | 'past'
+  | 'conscious'
+  | 'nearFuture'
+  | 'self'
+  | 'environment'
+  | 'hopesFears'
+  | 'outcome'
+  | 'unknown';
 
 export type SingleCardReport = {
   domain: QuestionDomain;
@@ -52,12 +64,42 @@ export type ThreeCardReport = {
   quote: string;
 };
 
+export type CelticCrossReport = {
+  domain: QuestionDomain;
+  overview: string;
+  cards: Array<{
+    positionName: string;
+    positionRole: CelticCrossPositionRole;
+    cardNameZh: string;
+    cardNameEn: string;
+    orientation: CardOrientation;
+    keywords: string[];
+    shortReading: string;
+    positionReading: string;
+  }>;
+  sections: {
+    coreConflict: string;
+    deepCause: string;
+    consciousDirection: string;
+    selfAndEnvironment: string;
+    emotionalTension: string;
+    futureTrend: string;
+    finalAdvice: string;
+    quote: string;
+  };
+};
+
 type BuildSingleCardReportInput = {
   drawn: DrawnCard;
   question?: string;
 };
 
 type BuildThreeCardReportInput = {
+  drawnCards: DrawnCard[];
+  question?: string;
+};
+
+type BuildCelticCrossReportInput = {
   drawnCards: DrawnCard[];
   question?: string;
 };
@@ -272,5 +314,158 @@ export function buildThreeCardReport({
       ? `下一步行动可以参考未来牌给出的方向：${futureReport.sections.actionAdvice}`
       : '请先补足牌面信息，再决定下一步行动。',
     quote: futureReport?.sections.quote ?? presentReport?.sections.quote ?? '让牌面成为镜子，而不是替你做决定的声音。',
+  };
+}
+
+function getCelticCrossPositionRole(positionName: string, index: number): CelticCrossPositionRole {
+  const normalized = positionName.trim().toLowerCase();
+
+  if (normalized.includes('现状') || normalized.includes('present')) return 'present';
+  if (normalized.includes('交叉') || normalized.includes('challenge') || normalized.includes('cross')) return 'challenge';
+  if (normalized.includes('根基') || normalized.includes('foundation')) return 'foundation';
+  if (normalized.includes('过去') || normalized.includes('past')) return 'past';
+  if (normalized.includes('顶部') || normalized.includes('显意识') || normalized.includes('目标') || normalized.includes('crown') || normalized.includes('conscious')) return 'conscious';
+  if (normalized.includes('即将') || normalized.includes('近期') || normalized.includes('near future')) return 'nearFuture';
+  if (normalized.includes('自我') || normalized.includes('self')) return 'self';
+  if (normalized.includes('环境') || normalized.includes('environment')) return 'environment';
+  if (normalized.includes('希望') || normalized.includes('恐惧') || normalized.includes('hopes') || normalized.includes('fears')) return 'hopesFears';
+  if (normalized.includes('结局') || normalized.includes('结果') || normalized.includes('outcome')) return 'outcome';
+
+  const fallbackRoles: CelticCrossPositionRole[] = [
+    'present',
+    'challenge',
+    'foundation',
+    'conscious',
+    'past',
+    'nearFuture',
+    'self',
+    'environment',
+    'hopesFears',
+    'outcome',
+  ];
+
+  return fallbackRoles[index] ?? 'unknown';
+}
+
+function buildCelticPositionReading(
+  role: CelticCrossPositionRole,
+  singleReport: SingleCardReport
+): string {
+  const cardName = singleReport.card.nameZh;
+  const keyword = singleReport.keywords[0] ?? singleReport.card.archetype;
+  const response = singleReport.sections.questionResponse;
+
+  const roleLead: Record<CelticCrossPositionRole, string> = {
+    present: `在“现状”位置，${cardName}揭示你正在经历的核心状态是${keyword}`,
+    challenge: `在“交叉”位置，${cardName}说明真正与现状交织的挑战或资源来自${keyword}`,
+    foundation: `在“根基”位置，${cardName}指出这件事深层的无意识基础是${keyword}`,
+    past: `在“过去”位置，${cardName}显示已经发生的${keyword}仍在塑造当前局面`,
+    conscious: `在“顶部”位置，${cardName}呈现你显意识里正在追求或看见的${keyword}`,
+    nearFuture: `在“即将”位置，${cardName}提示短期内会浮现的趋势与${keyword}有关`,
+    self: `在“自我”位置，${cardName}反映你面对问题时的内在姿态是${keyword}`,
+    environment: `在“环境”位置，${cardName}显示外部人事与氛围带来的${keyword}影响`,
+    hopesFears: `在“希望/恐惧”位置，${cardName}暴露内心深处对${keyword}的渴望或担忧`,
+    outcome: `在“结局”位置，${cardName}指向当前能量最可能汇聚成的${keyword}结果`,
+    unknown: `${cardName}在这个位置上提示你关注${keyword}的能量`,
+  };
+
+  return `${roleLead[role]}：${response}`;
+}
+
+function cardSummary(card: CelticCrossReport['cards'][number] | undefined): string {
+  if (!card) return '牌面信息不足';
+  const orientationText = card.orientation === 'upright' ? '正位' : '逆位';
+  const keyword = card.keywords[0] ?? card.cardNameZh;
+  return `${card.positionName}的${card.cardNameZh}（${orientationText}）带来${keyword}`;
+}
+
+function buildCelticOverview(cards: CelticCrossReport['cards'], domain: QuestionDomain): string {
+  const domainContext: Record<QuestionDomain, string> = {
+    general: '这组凯尔特十字呈现的是整体处境的深层结构',
+    relationship: '这组凯尔特十字呈现的是关系中的核心拉扯与长期走向',
+    career: '这组凯尔特十字呈现的是事业议题中的现实阻力、资源与趋势',
+    study: '这组凯尔特十字呈现的是学习议题里的基础状态与推进节奏',
+    money: '这组凯尔特十字呈现的是资源、风险与财务判断的系统图景',
+    decision: '这组凯尔特十字呈现的是选择背后的动机、阻力与结果链条',
+    selfGrowth: '这组凯尔特十字呈现的是内在成长过程中的显意识、阴影与转化方向',
+  };
+  const reversedCount = cards.filter(card => card.orientation === 'reversed').length;
+  const reversedTone = reversedCount >= 5
+    ? '逆位能量较多，说明这次议题的关键不在强行推进，而在先校正阻滞与内在矛盾'
+    : reversedCount >= 2
+      ? '牌面中有若干逆位提示，需要留意阻点，但整体仍有可调整的空间'
+      : '牌面能量较为顺畅，重点在于看清结构后稳定行动';
+
+  return `${domainContext[domain]}：${cardSummary(cards[0])}，${cardSummary(cards[1])}，而${cardSummary(cards[9])}。${reversedTone}。`;
+}
+
+function combinePair(
+  title: string,
+  first: CelticCrossReport['cards'][number] | undefined,
+  second: CelticCrossReport['cards'][number] | undefined,
+  focus: string
+): string {
+  if (!first && !second) return `${title}：牌面信息不足，暂时无法形成稳定判断。`;
+  if (!second) return `${title}：${cardSummary(first)}，${focus}。`;
+  return `${title}：${cardSummary(first)}，同时${cardSummary(second)}。这说明${focus}。`;
+}
+
+export function buildCelticCrossReport({
+  drawnCards,
+  question = '',
+}: BuildCelticCrossReportInput): CelticCrossReport {
+  const domain = detectQuestionDomain(question);
+  const singleReports = drawnCards.slice(0, 10).map(drawn => buildSingleCardReport({ drawn, question }));
+
+  const cards: CelticCrossReport['cards'] = singleReports.map((singleReport, index) => {
+    const drawn = drawnCards[index];
+    const positionName = drawn?.position || `Position ${index + 1}`;
+    const positionRole = getCelticCrossPositionRole(positionName, index);
+
+    return {
+      positionName,
+      positionRole,
+      cardNameZh: singleReport.card.nameZh,
+      cardNameEn: singleReport.card.nameEn,
+      orientation: singleReport.orientation,
+      keywords: singleReport.keywords,
+      shortReading: singleReport.sections.essence,
+      positionReading: buildCelticPositionReading(positionRole, singleReport),
+    };
+  });
+
+  const present = cards[0];
+  const challenge = cards[1];
+  const foundation = cards[2];
+  const conscious = cards[3];
+  const past = cards[4];
+  const nearFuture = cards[5];
+  const self = cards[6];
+  const environment = cards[7];
+  const hopesFears = cards[8];
+  const outcome = cards[9];
+  const outcomeReport = singleReports[9] ?? singleReports[singleReports.length - 1];
+  const presentReport = singleReports[0] ?? outcomeReport;
+
+  return {
+    domain,
+    overview: buildCelticOverview(cards, domain),
+    cards,
+    sections: {
+      coreConflict: combinePair('核心冲突', present, challenge, '当前真正要处理的是现状能量与交叉能量之间的互动，而不是只看表面事件'),
+      deepCause: combinePair('深层原因', foundation, past, '问题的根并非突然出现，而是由深层基础与过去经验共同累积而成'),
+      consciousDirection: combinePair('意识方向', conscious, nearFuture, '你的目标感会影响近期趋势，越能看清想要去的方向，越能提前调整节奏'),
+      selfAndEnvironment: combinePair('自我与环境', self, environment, '个人态度与外部条件正在互相牵动，单靠内在意愿或外界变化都不足以完成转化'),
+      emotionalTension: hopesFears
+        ? `情绪张力：${cardSummary(hopesFears)}。这张牌提示你，内心最强烈的期待与最深的担忧可能来自同一个核心需求，需要被诚实看见。`
+        : '情绪张力：牌面信息不足，暂时无法判断希望与恐惧的核心。',
+      futureTrend: outcome
+        ? `未来趋势：${cardSummary(outcome)}。如果维持当前能量路径，结局会更接近这张牌所代表的方向：${outcome.positionReading}`
+        : '未来趋势：缺少结果牌，无法形成完整趋势判断。',
+      finalAdvice: outcomeReport
+        ? `最终建议：先回应现状中的真实矛盾，再把行动落到结果牌给出的方向上。${outcomeReport.sections.actionAdvice}`
+        : '最终建议：请先补足牌面信息，再做进一步判断。',
+      quote: outcomeReport?.sections.quote ?? presentReport?.sections.quote ?? '真正的答案不是预言，而是你看清结构之后做出的选择。',
+    },
   };
 }

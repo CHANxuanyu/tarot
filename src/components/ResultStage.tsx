@@ -3,7 +3,7 @@ import { useDivinationContext } from '../store/DivinationContext';
 import { ResultSingleCard } from './ResultSingleCard';
 import { ResultThreeCard } from './ResultThreeCard';
 import { ResultCelticCross } from './ResultCelticCross';
-import { buildSingleCardReport, buildThreeCardReport } from '../core/TarotReadingEngine';
+import { buildCelticCrossReport, buildSingleCardReport, buildThreeCardReport } from '../core/TarotReadingEngine';
 import { saveReading } from '../core/HistoryManager';
 
 export function ResultStage() {
@@ -78,6 +78,52 @@ export function ResultStage() {
         '',
         '【一句启示】',
         report.quote,
+      ].filter(Boolean).join('\n');
+    }
+
+    if (state.spreadId === 'celtic-cross' && state.drawnCards.length >= 10) {
+      const report = buildCelticCrossReport({
+        drawnCards: state.drawnCards,
+        question: state.question,
+      });
+      const questionText = state.question || '无特定问题，本次解读将以通用能量为主。';
+
+      return [
+        `凯尔特十字深度解读报告 — ${new Date().toLocaleDateString('zh-CN')}`,
+        `问题：${questionText}`,
+        '',
+        '【总览】',
+        report.overview,
+        '',
+        ...report.cards.flatMap(card => [
+          `【${card.positionName}】${card.cardNameZh} / ${card.cardNameEn}（${card.orientation === 'upright' ? '正位' : '逆位'}）`,
+          `关键词：${card.keywords.join(' · ')}`,
+          card.positionReading,
+          '',
+        ]),
+        '【核心冲突】',
+        report.sections.coreConflict,
+        '',
+        '【深层原因】',
+        report.sections.deepCause,
+        '',
+        '【意识方向】',
+        report.sections.consciousDirection,
+        '',
+        '【自我与环境】',
+        report.sections.selfAndEnvironment,
+        '',
+        '【情绪张力】',
+        report.sections.emotionalTension,
+        '',
+        '【未来趋势】',
+        report.sections.futureTrend,
+        '',
+        '【最终建议】',
+        report.sections.finalAdvice,
+        '',
+        '【一句启示】',
+        report.sections.quote,
       ].filter(Boolean).join('\n');
     }
 
