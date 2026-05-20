@@ -3,21 +3,24 @@ import { useDivinationContext } from '../store/DivinationContext';
 import { MoonPhasePanel } from '../components/MoonPhasePanel';
 import { TodayGuidance } from '../components/TodayGuidance';
 import type { SpreadId } from '../core/types';
+import { useI18n } from '../i18n/I18nContext';
+import type { TranslationKey } from '../i18n';
 
 const SPREAD_OPTIONS: Array<{
   id: SpreadId;
   icon: string;
-  nameZh: string;
-  desc: string;
+  nameKey: TranslationKey;
+  descKey: TranslationKey;
 }> = [
-  { id: 'single-card', icon: '✦', nameZh: '单牌占卜', desc: 'Single Card · 一问一答' },
-  { id: 'three-card',  icon: '⟁', nameZh: '三牌阵',   desc: 'Three Card · 过去现在未来' },
-  { id: 'celtic-cross',icon: '✙', nameZh: '凯尔特十字', desc: 'Celtic Cross · 十位解析' },
+  { id: 'single-card', icon: '✦', nameKey: 'spread.single.name', descKey: 'spread.single.desc' },
+  { id: 'three-card',  icon: '⟁', nameKey: 'spread.three.name', descKey: 'spread.three.desc' },
+  { id: 'celtic-cross',icon: '✙', nameKey: 'spread.celtic.name', descKey: 'spread.celtic.desc' },
 ];
 
 export function HomePage() {
   const navigate = useNavigate();
   const { state, dispatch } = useDivinationContext();
+  const { t } = useI18n();
 
   const handleSelectSpread = (spreadId: SpreadId) => {
     const question = state.question.trim();
@@ -35,7 +38,7 @@ export function HomePage() {
     return (
       <div className="loading">
         <div className="loading-symbol">✦</div>
-        <div className="loading-text">正在加载神秘能量…</div>
+        <div className="loading-text">{t('loading.mystic')}</div>
       </div>
     );
   }
@@ -43,26 +46,24 @@ export function HomePage() {
   return (
     <div className="page">
       <div className="home-layout">
-        {/* Left panel: moon phases + zodiac */}
         <aside className="side-panel">
           <MoonPhasePanel />
         </aside>
 
-        {/* Center: main content */}
         <main className="home-main">
-          <div className="home-title-zh">塔 罗 启 示</div>
-          <div className="home-title-en">T H E &nbsp; O R A C L E S</div>
+          <div className="home-title-zh">{t('home.titleZh')}</div>
+          <div className="home-title-en">{t('home.titleEn')}</div>
 
           <div className="home-arch-container">
             <img
               src="/assets/images/hero-arch.png"
-              alt="神秘玫瑰窗"
+              alt={t('home.heroAlt')}
               className="home-arch-img"
             />
           </div>
 
           <div className="section-divider">
-            <span>选择牌阵</span>
+            <span>{t('home.chooseSpread')}</span>
           </div>
 
           <div className="spread-options">
@@ -74,18 +75,18 @@ export function HomePage() {
               >
                 <div className="spread-btn-icon">{opt.icon}</div>
                 <div className="spread-btn-text">
-                  <span className="spread-btn-name-zh">{opt.nameZh}</span>
-                  <span className="spread-btn-desc">{opt.desc}</span>
+                  <span className="spread-btn-name-zh">{t(opt.nameKey)}</span>
+                  <span className="spread-btn-desc">{t(opt.descKey)}</span>
                 </div>
               </button>
             ))}
           </div>
 
           <div className="home-question-wrapper">
-            <div className="home-question-label">请在心中默想你的问题</div>
+            <div className="home-question-label">{t('home.questionLabel')}</div>
             <input
               className="home-question-input"
-              placeholder="在此输入问题（可选）"
+              placeholder={t('home.questionPlaceholder')}
               value={state.question}
               onChange={handleQuestionChange}
               maxLength={60}
@@ -93,7 +94,6 @@ export function HomePage() {
           </div>
         </main>
 
-        {/* Right panel: today's guidance */}
         <aside className="side-panel right">
           <TodayGuidance />
         </aside>

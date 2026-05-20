@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDivinationContext } from '../store/DivinationContext';
 import { getThemeAssetPath } from '../core/ThemeLoader';
 import { buildThreeCardReport } from '../core/TarotReadingEngine';
+import { useI18n } from '../i18n/I18nContext';
 
 interface Props {
   onCopy: () => void;
@@ -11,16 +12,17 @@ interface Props {
 export function ResultThreeCard({ onCopy, onSave }: Props) {
   const navigate = useNavigate();
   const { state, dispatch } = useDivinationContext();
+  const { locale, t } = useI18n();
 
   if (state.drawnCards.length < 3) return null;
 
   const report = buildThreeCardReport({
     drawnCards: state.drawnCards,
     question: state.question,
+    locale,
   });
   
-  const isZh = state.lang === 'zh';
-  const questionText = state.question || (isZh ? '无特定问题，本次解读将以通用能量为主。' : 'No specific question, reading will focus on general energy.');
+  const questionText = state.question || t('question.none');
 
   const handleReshuffle = () => {
     dispatch({ type: 'RESET' });
@@ -30,9 +32,9 @@ export function ResultThreeCard({ onCopy, onSave }: Props) {
   return (
     <div className="three-result-layout">
       <div className="three-report-header-section">
-        <h1 className="three-report-main-title">{isZh ? '你的三牌阵解读报告' : 'Your Three-Card Reading Report'}</h1>
+        <h1 className="three-report-main-title">{t('three.title')}</h1>
         <div className="three-report-question-box">
-          <div className="three-report-question-label">{isZh ? '你的问题' : 'YOUR QUERY'}</div>
+          <div className="three-report-question-label">{t('question.labelUpper')}</div>
           <div className="three-report-question-text">{questionText}</div>
         </div>
       </div>
@@ -61,8 +63,8 @@ export function ResultThreeCard({ onCopy, onSave }: Props) {
                 
                 <div className={`three-orientation-badge ${reportCard.orientation}`}>
                   {reportCard.orientation === 'reversed'
-                    ? (isZh ? '逆位' : 'Reversed')
-                    : (isZh ? '正位' : 'Upright')}
+                    ? t('orientation.reversed')
+                    : t('orientation.upright')}
                 </div>
                 
                 <div className="timeline-card-keywords">
@@ -81,18 +83,18 @@ export function ResultThreeCard({ onCopy, onSave }: Props) {
       </div>
 
       <div className="three-report-section three-report-section-highlight three-storyline-section">
-        <h3 className="three-section-title">{isZh ? '综合牌路' : 'Storyline Synthesis'}</h3>
+        <h3 className="three-section-title">{t('section.storyline')}</h3>
         <p className="three-section-content">{report.storyline}</p>
       </div>
 
       <div className="three-advice-grid">
         <div className="three-report-section">
-          <h3 className="three-section-title">{isZh ? '隐藏提醒' : 'Hidden Reminder'}</h3>
+          <h3 className="three-section-title">{t('section.hiddenReminder')}</h3>
           <p className="three-section-content">{report.hiddenReminder}</p>
         </div>
         
         <div className="three-report-section">
-          <h3 className="three-section-title">{isZh ? '行动建议' : 'Action Advice'}</h3>
+          <h3 className="three-section-title">{t('section.actionAdvice')}</h3>
           <p className="three-section-content">{report.actionAdvice}</p>
         </div>
       </div>
@@ -104,13 +106,13 @@ export function ResultThreeCard({ onCopy, onSave }: Props) {
 
       <div className="three-report-actions">
         <button className="three-action-btn" onClick={handleReshuffle}>
-          {isZh ? '重新抽牌' : 'Reshuffle'}
+          {t('button.reshuffle')}
         </button>
         <button className="three-action-btn primary" onClick={onCopy}>
-          {isZh ? '复制全文' : 'Copy Full Report'}
+          {t('button.copyFull')}
         </button>
         <button className="three-action-btn" onClick={onSave}>
-          {isZh ? '保存解读' : 'Save Reading'}
+          {t('button.saveReading')}
         </button>
       </div>
     </div>

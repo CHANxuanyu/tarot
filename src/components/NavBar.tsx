@@ -1,20 +1,26 @@
 import { NavLink } from 'react-router-dom';
+import { LOCALE_LABELS, type Locale, type TranslationKey } from '../i18n';
+import { useI18n } from '../i18n/I18nContext';
 
-const NAV_ITEMS = [
-  { to: '/', label: '首页', end: true },
-  { to: '/reading', label: '在线占卜' },
-  { to: '/learn', label: '学习殿堂' },
-  { to: '/calendar', label: '星象日历' },
-  { to: '/about', label: '关于' },
+const NAV_ITEMS: Array<{ to: string; labelKey: TranslationKey; end?: boolean }> = [
+  { to: '/', labelKey: 'nav.home', end: true },
+  { to: '/reading', labelKey: 'nav.reading' },
+  { to: '/learn', labelKey: 'nav.learn' },
+  { to: '/calendar', labelKey: 'nav.calendar' },
+  { to: '/about', labelKey: 'nav.about' },
 ];
 
+const LOCALES: Locale[] = ['zh-CN', 'en-US', 'fr-FR', 'es-ES'];
+
 export function NavBar() {
+  const { locale, setLocale, t } = useI18n();
+
   return (
     <nav className="nav">
       <NavLink to="/" className="nav-logo">
-        <span className="nav-logo-zh">塔罗启示</span>
+        <span className="nav-logo-zh">{t('app.logoZh')}</span>
         <span className="nav-logo-sep">✦</span>
-        <span style={{ fontFamily: 'Cinzel, serif', fontSize: '0.7rem', letterSpacing: '0.3em', opacity: 0.7 }}>THE ORACLES</span>
+        <span style={{ fontFamily: 'Cinzel, serif', fontSize: '0.7rem', letterSpacing: '0.3em', opacity: 0.7 }}>{t('app.logoEn')}</span>
       </NavLink>
 
       <ul className="nav-items">
@@ -25,11 +31,20 @@ export function NavBar() {
               end={item.end}
               className={({ isActive }) => isActive ? 'active' : ''}
             >
-              {item.label}
+              {t(item.labelKey)}
             </NavLink>
           </li>
         ))}
       </ul>
+
+      <label className="nav-language" title={t('nav.language')}>
+        <span>🌐</span>
+        <select className="language-select" value={locale} onChange={event => setLocale(event.target.value as Locale)}>
+          {LOCALES.map(item => (
+            <option key={item} value={item}>{LOCALE_LABELS[item]}</option>
+          ))}
+        </select>
+      </label>
     </nav>
   );
 }

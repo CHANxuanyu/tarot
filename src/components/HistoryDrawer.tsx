@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDivinationContext } from '../store/DivinationContext';
 import { getHistory, clearHistory, type ReadingRecord } from '../core/HistoryManager';
+import { useI18n } from '../i18n/I18nContext';
 
 export function HistoryDrawer() {
   const { state } = useDivinationContext();
-  const copy = state.copy?.lang[state.lang];
+  const { locale, t } = useI18n();
   const [open, setOpen] = useState(false);
   const [records, setRecords] = useState<ReadingRecord[]>([]);
 
@@ -20,7 +21,7 @@ export function HistoryDrawer() {
 
   const formatDate = (ts: number) => {
     const d = new Date(ts);
-    return d.toLocaleDateString(state.lang === 'zh' ? 'zh-CN' : 'en-US', {
+    return d.toLocaleDateString(locale, {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
@@ -30,7 +31,7 @@ export function HistoryDrawer() {
 
   return (
     <>
-      <button className="history-toggle" onClick={handleOpen} title={copy?.history}>
+      <button className="history-toggle" onClick={handleOpen} title={t('history.title')}>
         ☰
       </button>
 
@@ -38,12 +39,12 @@ export function HistoryDrawer() {
         <div className="history-overlay" onClick={() => setOpen(false)}>
           <div className="history-drawer" onClick={e => e.stopPropagation()}>
             <div className="history-header">
-              <h3>{copy?.history || 'History'}</h3>
+              <h3>{t('history.title')}</h3>
               <button className="nav-btn" onClick={() => setOpen(false)}>✕</button>
             </div>
 
             {records.length === 0 ? (
-              <p className="history-empty">{copy?.noHistory || 'No readings yet'}</p>
+              <p className="history-empty">{t('history.empty')}</p>
             ) : (
               <>
                 <div className="history-list">
@@ -53,7 +54,7 @@ export function HistoryDrawer() {
                       <div className="history-cards-summary">
                         {r.cards.map((c, i) => (
                           <span key={i} className="history-card-tag">
-                            {state.lang === 'zh' ? c.cardNameZh : c.cardName}
+                            {locale === 'zh-CN' ? c.cardNameZh : c.cardName}
                             {c.reversed ? ' ↺' : ''}
                           </span>
                         ))}
@@ -62,7 +63,7 @@ export function HistoryDrawer() {
                   ))}
                 </div>
                 <button className="action-btn history-clear" onClick={handleClear}>
-                  {state.lang === 'zh' ? '清除记录' : 'Clear All'}
+                  {t('history.clear')}
                 </button>
               </>
             )}

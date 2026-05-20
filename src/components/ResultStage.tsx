@@ -3,11 +3,14 @@ import { useDivinationContext } from '../store/DivinationContext';
 import { ResultSingleCard } from './ResultSingleCard';
 import { ResultThreeCard } from './ResultThreeCard';
 import { ResultCelticCross } from './ResultCelticCross';
+import { AiReadingPanel } from './AiReadingPanel';
 import { buildCelticCrossReport, buildSingleCardReport, buildThreeCardReport } from '../core/TarotReadingEngine';
 import { saveReading } from '../core/HistoryManager';
+import { useI18n } from '../i18n/I18nContext';
 
 export function ResultStage() {
   const { state } = useDivinationContext();
+  const { locale, t } = useI18n();
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -18,34 +21,35 @@ export function ResultStage() {
       const report = buildSingleCardReport({
         drawn: singleDrawn,
         question: state.question,
+        locale,
       });
-      const orientationLabel = report.orientation === 'upright' ? '正位' : '逆位';
-      const questionText = state.question || '无特定问题，本次解读将以通用能量为主。';
+      const orientationLabel = report.orientation === 'upright' ? t('orientation.upright') : t('orientation.reversed');
+      const questionText = state.question || t('question.none');
 
       return [
-        `塔罗单牌解读报告 — ${new Date().toLocaleDateString('zh-CN')}`,
-        `问题：${questionText}`,
-        `牌面：${report.card.nameZh} / ${report.card.nameEn}（${orientationLabel}）`,
-        `原型：${report.identity.archetype}`,
-        `元素：${report.identity.element}`,
-        `星象：${report.identity.astrology}`,
-        report.identity.mythicAssociation.length ? `神话关联：${report.identity.mythicAssociation.join(' · ')}` : '',
-        `牌面象征：${report.symbols.join(' · ')}`,
-        `关键词：${report.keywords.join(' · ')}`,
+        `${t('copy.singleTitle')} — ${new Date().toLocaleDateString(locale)}`,
+        `${t('copy.question')}：${questionText}`,
+        `${t('copy.card')}：${report.card.nameZh} / ${report.card.nameEn}（${orientationLabel}）`,
+        `${t('copy.archetype')}：${report.identity.archetype}`,
+        `${t('copy.element')}：${report.identity.element}`,
+        `${t('copy.astrology')}：${report.identity.astrology}`,
+        report.identity.mythicAssociation.length ? `${t('copy.myth')}：${report.identity.mythicAssociation.join(' · ')}` : '',
+        `${t('copy.symbols')}：${report.symbols.join(' · ')}`,
+        `${t('copy.keywords')}：${report.keywords.join(' · ')}`,
         '',
-        '【牌意精解】',
+        `【${t('section.essence')}】`,
         report.sections.essence,
         '',
-        '【对你问题的回应】',
+        `【${t('section.questionResponse')}】`,
         report.sections.questionResponse,
         '',
-        '【隐藏提醒】',
+        `【${t('section.hiddenReminder')}】`,
         report.sections.hiddenReminder,
         '',
-        '【行动建议】',
+        `【${t('section.actionAdvice')}】`,
         report.sections.actionAdvice,
         '',
-        '【一句启示】',
+        `【${t('section.quote')}】`,
         report.sections.quote,
       ].filter(Boolean).join('\n');
     }
@@ -54,29 +58,30 @@ export function ResultStage() {
       const report = buildThreeCardReport({
         drawnCards: state.drawnCards,
         question: state.question,
+        locale,
       });
-      const questionText = state.question || '无特定问题，本次解读将以通用能量为主。';
+      const questionText = state.question || t('question.none');
 
       return [
-        `塔罗三牌阵解读报告 — ${new Date().toLocaleDateString('zh-CN')}`,
-        `问题：${questionText}`,
+        `${t('copy.threeTitle')} — ${new Date().toLocaleDateString(locale)}`,
+        `${t('copy.question')}：${questionText}`,
         '',
         ...report.cards.flatMap(card => [
-          `【${card.positionName}】${card.cardNameZh} / ${card.cardNameEn}（${card.orientation === 'upright' ? '正位' : '逆位'}）`,
-          `关键词：${card.keywords.join(' · ')}`,
+          `【${card.positionName}】${card.cardNameZh} / ${card.cardNameEn}（${card.orientation === 'upright' ? t('orientation.upright') : t('orientation.reversed')}）`,
+          `${t('copy.keywords')}：${card.keywords.join(' · ')}`,
           card.roleReading,
           '',
         ]),
-        '【综合牌路】',
+        `【${t('section.storyline')}】`,
         report.storyline,
         '',
-        '【隐藏提醒】',
+        `【${t('section.hiddenReminder')}】`,
         report.hiddenReminder,
         '',
-        '【行动建议】',
+        `【${t('section.actionAdvice')}】`,
         report.actionAdvice,
         '',
-        '【一句启示】',
+        `【${t('section.quote')}】`,
         report.quote,
       ].filter(Boolean).join('\n');
     }
@@ -85,55 +90,56 @@ export function ResultStage() {
       const report = buildCelticCrossReport({
         drawnCards: state.drawnCards,
         question: state.question,
+        locale,
       });
-      const questionText = state.question || '无特定问题，本次解读将以通用能量为主。';
+      const questionText = state.question || t('question.none');
 
       return [
-        `凯尔特十字深度解读报告 — ${new Date().toLocaleDateString('zh-CN')}`,
-        `问题：${questionText}`,
+        `${t('copy.celticTitle')} — ${new Date().toLocaleDateString(locale)}`,
+        `${t('copy.question')}：${questionText}`,
         '',
-        '【总览】',
+        `【${t('copy.overview')}】`,
         report.overview,
         '',
         ...report.cards.flatMap(card => [
-          `【${card.positionName}】${card.cardNameZh} / ${card.cardNameEn}（${card.orientation === 'upright' ? '正位' : '逆位'}）`,
-          `关键词：${card.keywords.join(' · ')}`,
+          `【${card.positionName}】${card.cardNameZh} / ${card.cardNameEn}（${card.orientation === 'upright' ? t('orientation.upright') : t('orientation.reversed')}）`,
+          `${t('copy.keywords')}：${card.keywords.join(' · ')}`,
           card.positionReading,
           '',
         ]),
-        '【核心冲突】',
+        `【${t('section.coreConflict')}】`,
         report.sections.coreConflict,
         '',
-        '【深层原因】',
+        `【${t('section.deepCause')}】`,
         report.sections.deepCause,
         '',
-        '【意识方向】',
+        `【${t('section.consciousDirection')}】`,
         report.sections.consciousDirection,
         '',
-        '【自我与环境】',
+        `【${t('section.selfAndEnvironment')}】`,
         report.sections.selfAndEnvironment,
         '',
-        '【情绪张力】',
+        `【${t('section.emotionalTension')}】`,
         report.sections.emotionalTension,
         '',
-        '【未来趋势】',
+        `【${t('section.futureTrend')}】`,
         report.sections.futureTrend,
         '',
-        '【最终建议】',
+        `【${t('section.finalAdvice')}】`,
         report.sections.finalAdvice,
         '',
-        '【一句启示】',
+        `【${t('section.quote')}】`,
         report.sections.quote,
       ].filter(Boolean).join('\n');
     }
 
     const lines: string[] = [
-      `塔罗占卜结果 — ${new Date().toLocaleDateString('zh-CN')}`,
+      `${t('copy.genericTitle')} — ${new Date().toLocaleDateString(locale)}`,
     ];
-    if (state.question) lines.push(`问题：${state.question}`);
+    if (state.question) lines.push(`${t('copy.question')}：${state.question}`);
     lines.push('');
     state.drawnCards.forEach(d => {
-      lines.push(`【${d.position}】${d.card.nameZh} ${d.reversed ? '（逆位）' : '（正位）'}`);
+      lines.push(`【${d.position}】${d.card.nameZh} ${d.reversed ? `（${t('orientation.reversed')}）` : `（${t('orientation.upright')}）`}`);
     });
     return lines.join('\n');
   };
@@ -160,9 +166,16 @@ export function ResultStage() {
   };
 
   const actionProps = { onCopy: handleCopy, onSave: handleSave };
+  const aiReadingContext = {
+    spreadId: state.spreadId,
+    locale,
+    question: state.question,
+    drawnCards: state.drawnCards,
+    localReportText: buildResultText(),
+  };
 
   return (
-    <div className="reading-page" style={{ alignItems: 'flex-start', padding: '1rem 0' }}>
+    <div className="reading-page" style={{ alignItems: 'center', flexDirection: 'column', padding: '1rem 0' }}>
       {(copied || saved) && (
         <div style={{
           position: 'fixed', top: '80px', left: '50%', transform: 'translateX(-50%)',
@@ -171,13 +184,14 @@ export function ResultStage() {
           fontFamily: 'var(--font-zh)', fontSize: '0.85rem', color: 'var(--gold-bright)',
           zIndex: 999, pointerEvents: 'none',
         }}>
-          {copied ? '✓ 已复制到剪贴板' : '✓ 已保存到日记'}
+          {copied ? t('toast.copied') : t('toast.saved')}
         </div>
       )}
 
       {state.spreadId === 'single-card'  && <ResultSingleCard  {...actionProps} />}
       {state.spreadId === 'three-card'   && <ResultThreeCard   {...actionProps} />}
       {state.spreadId === 'celtic-cross' && <ResultCelticCross {...actionProps} />}
+      <AiReadingPanel context={aiReadingContext} />
     </div>
   );
 }

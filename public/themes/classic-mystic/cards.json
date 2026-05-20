@@ -1,27 +1,489 @@
 {
   "deck": "major-arcana",
   "cards": [
-    { "id": 0, "name": "The Fool", "nameZh": "愚者", "keywords": ["beginnings", "innocence", "spontaneity"], "keywordsReversed": ["recklessness", "fear", "holding back"], "image": "assets/cards/00-fool.png" },
-    { "id": 1, "name": "The Magician", "nameZh": "魔术师", "keywords": ["manifestation", "resourcefulness", "power"], "keywordsReversed": ["manipulation", "poor planning", "untapped talents"], "image": "assets/cards/01-magician.png" },
-    { "id": 2, "name": "The High Priestess", "nameZh": "女祭司", "keywords": ["intuition", "sacred knowledge", "mystery"], "keywordsReversed": ["secrets", "disconnected", "withdrawal"], "image": "assets/cards/02-high-priestess.png" },
-    { "id": 3, "name": "The Empress", "nameZh": "女皇", "keywords": ["femininity", "beauty", "nature"], "keywordsReversed": ["creative block", "dependence", "emptiness"], "image": "assets/cards/03-empress.png" },
-    { "id": 4, "name": "The Emperor", "nameZh": "皇帝", "keywords": ["authority", "structure", "control"], "keywordsReversed": ["tyranny", "rigidity", "lack of discipline"], "image": "assets/cards/04-emperor.png" },
-    { "id": 5, "name": "The Hierophant", "nameZh": "教皇", "keywords": ["spiritual wisdom", "tradition", "conformity"], "keywordsReversed": ["personal beliefs", "freedom", "challenging status quo"], "image": "assets/cards/05-hierophant.png" },
-    { "id": 6, "name": "The Lovers", "nameZh": "恋人", "keywords": ["love", "harmony", "relationships"], "keywordsReversed": ["self-love", "disharmony", "imbalance"], "image": "assets/cards/06-lovers.png" },
-    { "id": 7, "name": "The Chariot", "nameZh": "战车", "keywords": ["control", "willpower", "success"], "keywordsReversed": ["self-discipline", "opposition", "lack of direction"], "image": "assets/cards/07-chariot.png" },
-    { "id": 8, "name": "Strength", "nameZh": "力量", "keywords": ["strength", "courage", "persuasion"], "keywordsReversed": ["self-doubt", "weakness", "insecurity"], "image": "assets/cards/08-strength.png" },
-    { "id": 9, "name": "The Hermit", "nameZh": "隐士", "keywords": ["soul-searching", "introspection", "guidance"], "keywordsReversed": ["isolation", "loneliness", "withdrawal"], "image": "assets/cards/09-hermit.png" },
-    { "id": 10, "name": "Wheel of Fortune", "nameZh": "命运之轮", "keywords": ["good luck", "karma", "cycles"], "keywordsReversed": ["bad luck", "resistance to change", "breaking cycles"], "image": "assets/cards/10-wheel.png" },
-    { "id": 11, "name": "Justice", "nameZh": "正义", "keywords": ["justice", "fairness", "truth"], "keywordsReversed": ["unfairness", "dishonesty", "lack of accountability"], "image": "assets/cards/11-justice.png" },
-    { "id": 12, "name": "The Hanged Man", "nameZh": "吊人", "keywords": ["pause", "surrender", "new perspective"], "keywordsReversed": ["delays", "resistance", "stalling"], "image": "assets/cards/12-hanged-man.png" },
-    { "id": 13, "name": "Death", "nameZh": "死神", "keywords": ["endings", "change", "transformation"], "keywordsReversed": ["resistance to change", "personal transformation", "inner purging"], "image": "assets/cards/13-death.png" },
-    { "id": 14, "name": "Temperance", "nameZh": "节制", "keywords": ["balance", "moderation", "patience"], "keywordsReversed": ["imbalance", "excess", "self-healing"], "image": "assets/cards/14-temperance.png" },
-    { "id": 15, "name": "The Devil", "nameZh": "恶魔", "keywords": ["shadow self", "attachment", "addiction"], "keywordsReversed": ["releasing", "breaking free", "restoring control"], "image": "assets/cards/15-devil.png" },
-    { "id": 16, "name": "The Tower", "nameZh": "塔", "keywords": ["sudden change", "upheaval", "revelation"], "keywordsReversed": ["personal transformation", "fear of change", "averting disaster"], "image": "assets/cards/16-tower.png" },
-    { "id": 17, "name": "The Star", "nameZh": "星星", "keywords": ["hope", "faith", "renewal"], "keywordsReversed": ["lack of faith", "despair", "self-trust"], "image": "assets/cards/17-star.png" },
-    { "id": 18, "name": "The Moon", "nameZh": "月亮", "keywords": ["illusion", "fear", "subconscious"], "keywordsReversed": ["release of fear", "repressed emotion", "inner confusion"], "image": "assets/cards/18-moon.png" },
-    { "id": 19, "name": "The Sun", "nameZh": "太阳", "keywords": ["positivity", "fun", "warmth"], "keywordsReversed": ["inner child", "feeling down", "overly optimistic"], "image": "assets/cards/19-sun.png" },
-    { "id": 20, "name": "Judgement", "nameZh": "审判", "keywords": ["judgement", "rebirth", "inner calling"], "keywordsReversed": ["self-doubt", "inner critic", "ignoring the call"], "image": "assets/cards/20-judgement.png" },
-    { "id": 21, "name": "The World", "nameZh": "世界", "keywords": ["completion", "integration", "accomplishment"], "keywordsReversed": ["seeking closure", "shortcuts", "delays"], "image": "assets/cards/21-world.png" }
+    {
+      "id": 0,
+      "name": "The Fool",
+      "nameZh": "愚者",
+      "keywords": [
+        "beginnings",
+        "innocence",
+        "spontaneity"
+      ],
+      "keywordsReversed": [
+        "recklessness",
+        "fear",
+        "holding back"
+      ],
+      "image": "assets/cards/00-fool.png",
+      "shortName": {
+        "zh-CN": "愚者",
+        "en-US": "Fool",
+        "fr-FR": "Fou",
+        "es-ES": "Loco"
+      }
+    },
+    {
+      "id": 1,
+      "name": "The Magician",
+      "nameZh": "魔术师",
+      "keywords": [
+        "manifestation",
+        "resourcefulness",
+        "power"
+      ],
+      "keywordsReversed": [
+        "manipulation",
+        "poor planning",
+        "untapped talents"
+      ],
+      "image": "assets/cards/01-magician.png",
+      "shortName": {
+        "zh-CN": "魔术师",
+        "en-US": "Magician",
+        "fr-FR": "Magicien",
+        "es-ES": "Mago"
+      }
+    },
+    {
+      "id": 2,
+      "name": "The High Priestess",
+      "nameZh": "女祭司",
+      "keywords": [
+        "intuition",
+        "sacred knowledge",
+        "mystery"
+      ],
+      "keywordsReversed": [
+        "secrets",
+        "disconnected",
+        "withdrawal"
+      ],
+      "image": "assets/cards/02-high-priestess.png",
+      "shortName": {
+        "zh-CN": "女祭司",
+        "en-US": "High Priestess",
+        "fr-FR": "Prêtresse",
+        "es-ES": "Sacerdotisa"
+      }
+    },
+    {
+      "id": 3,
+      "name": "The Empress",
+      "nameZh": "女皇",
+      "keywords": [
+        "femininity",
+        "beauty",
+        "nature"
+      ],
+      "keywordsReversed": [
+        "creative block",
+        "dependence",
+        "emptiness"
+      ],
+      "image": "assets/cards/03-empress.png",
+      "shortName": {
+        "zh-CN": "女皇",
+        "en-US": "Empress",
+        "fr-FR": "Impératrice",
+        "es-ES": "Emperatriz"
+      }
+    },
+    {
+      "id": 4,
+      "name": "The Emperor",
+      "nameZh": "皇帝",
+      "keywords": [
+        "authority",
+        "structure",
+        "control"
+      ],
+      "keywordsReversed": [
+        "tyranny",
+        "rigidity",
+        "lack of discipline"
+      ],
+      "image": "assets/cards/04-emperor.png",
+      "shortName": {
+        "zh-CN": "皇帝",
+        "en-US": "Emperor",
+        "fr-FR": "Empereur",
+        "es-ES": "Emperador"
+      }
+    },
+    {
+      "id": 5,
+      "name": "The Hierophant",
+      "nameZh": "教皇",
+      "keywords": [
+        "spiritual wisdom",
+        "tradition",
+        "conformity"
+      ],
+      "keywordsReversed": [
+        "personal beliefs",
+        "freedom",
+        "challenging status quo"
+      ],
+      "image": "assets/cards/05-hierophant.png",
+      "shortName": {
+        "zh-CN": "教皇",
+        "en-US": "Hierophant",
+        "fr-FR": "Hiérophante",
+        "es-ES": "Hierofante"
+      }
+    },
+    {
+      "id": 6,
+      "name": "The Lovers",
+      "nameZh": "恋人",
+      "keywords": [
+        "love",
+        "harmony",
+        "relationships"
+      ],
+      "keywordsReversed": [
+        "self-love",
+        "disharmony",
+        "imbalance"
+      ],
+      "image": "assets/cards/06-lovers.png",
+      "shortName": {
+        "zh-CN": "恋人",
+        "en-US": "Lovers",
+        "fr-FR": "Amoureux",
+        "es-ES": "Enamorados"
+      }
+    },
+    {
+      "id": 7,
+      "name": "The Chariot",
+      "nameZh": "战车",
+      "keywords": [
+        "control",
+        "willpower",
+        "success"
+      ],
+      "keywordsReversed": [
+        "self-discipline",
+        "opposition",
+        "lack of direction"
+      ],
+      "image": "assets/cards/07-chariot.png",
+      "shortName": {
+        "zh-CN": "战车",
+        "en-US": "Chariot",
+        "fr-FR": "Chariot",
+        "es-ES": "Carro"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Strength",
+      "nameZh": "力量",
+      "keywords": [
+        "strength",
+        "courage",
+        "persuasion"
+      ],
+      "keywordsReversed": [
+        "self-doubt",
+        "weakness",
+        "insecurity"
+      ],
+      "image": "assets/cards/08-strength.png",
+      "shortName": {
+        "zh-CN": "力量",
+        "en-US": "Strength",
+        "fr-FR": "Force",
+        "es-ES": "Fuerza"
+      }
+    },
+    {
+      "id": 9,
+      "name": "The Hermit",
+      "nameZh": "隐士",
+      "keywords": [
+        "soul-searching",
+        "introspection",
+        "guidance"
+      ],
+      "keywordsReversed": [
+        "isolation",
+        "loneliness",
+        "withdrawal"
+      ],
+      "image": "assets/cards/09-hermit.png",
+      "shortName": {
+        "zh-CN": "隐士",
+        "en-US": "Hermit",
+        "fr-FR": "Hermite",
+        "es-ES": "Ermitaño"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Wheel of Fortune",
+      "nameZh": "命运之轮",
+      "keywords": [
+        "good luck",
+        "karma",
+        "cycles"
+      ],
+      "keywordsReversed": [
+        "bad luck",
+        "resistance to change",
+        "breaking cycles"
+      ],
+      "image": "assets/cards/10-wheel.png",
+      "shortName": {
+        "zh-CN": "命运之轮",
+        "en-US": "Wheel",
+        "fr-FR": "Roue",
+        "es-ES": "Rueda"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Justice",
+      "nameZh": "正义",
+      "keywords": [
+        "justice",
+        "fairness",
+        "truth"
+      ],
+      "keywordsReversed": [
+        "unfairness",
+        "dishonesty",
+        "lack of accountability"
+      ],
+      "image": "assets/cards/11-justice.png",
+      "shortName": {
+        "zh-CN": "正义",
+        "en-US": "Justice",
+        "fr-FR": "Justice",
+        "es-ES": "Justicia"
+      }
+    },
+    {
+      "id": 12,
+      "name": "The Hanged Man",
+      "nameZh": "吊人",
+      "keywords": [
+        "pause",
+        "surrender",
+        "new perspective"
+      ],
+      "keywordsReversed": [
+        "delays",
+        "resistance",
+        "stalling"
+      ],
+      "image": "assets/cards/12-hanged-man.png",
+      "shortName": {
+        "zh-CN": "吊人",
+        "en-US": "Hanged Man",
+        "fr-FR": "Pendu",
+        "es-ES": "Colgado"
+      }
+    },
+    {
+      "id": 13,
+      "name": "Death",
+      "nameZh": "死神",
+      "keywords": [
+        "endings",
+        "change",
+        "transformation"
+      ],
+      "keywordsReversed": [
+        "resistance to change",
+        "personal transformation",
+        "inner purging"
+      ],
+      "image": "assets/cards/13-death.png",
+      "shortName": {
+        "zh-CN": "死神",
+        "en-US": "Death",
+        "fr-FR": "Mort",
+        "es-ES": "Muerte"
+      }
+    },
+    {
+      "id": 14,
+      "name": "Temperance",
+      "nameZh": "节制",
+      "keywords": [
+        "balance",
+        "moderation",
+        "patience"
+      ],
+      "keywordsReversed": [
+        "imbalance",
+        "excess",
+        "self-healing"
+      ],
+      "image": "assets/cards/14-temperance.png",
+      "shortName": {
+        "zh-CN": "节制",
+        "en-US": "Temperance",
+        "fr-FR": "Tempérance",
+        "es-ES": "Templanza"
+      }
+    },
+    {
+      "id": 15,
+      "name": "The Devil",
+      "nameZh": "恶魔",
+      "keywords": [
+        "shadow self",
+        "attachment",
+        "addiction"
+      ],
+      "keywordsReversed": [
+        "releasing",
+        "breaking free",
+        "restoring control"
+      ],
+      "image": "assets/cards/15-devil.png",
+      "shortName": {
+        "zh-CN": "恶魔",
+        "en-US": "Devil",
+        "fr-FR": "Diable",
+        "es-ES": "Diablo"
+      }
+    },
+    {
+      "id": 16,
+      "name": "The Tower",
+      "nameZh": "塔",
+      "keywords": [
+        "sudden change",
+        "upheaval",
+        "revelation"
+      ],
+      "keywordsReversed": [
+        "personal transformation",
+        "fear of change",
+        "averting disaster"
+      ],
+      "image": "assets/cards/16-tower.png",
+      "shortName": {
+        "zh-CN": "塔",
+        "en-US": "Tower",
+        "fr-FR": "Tour",
+        "es-ES": "Torre"
+      }
+    },
+    {
+      "id": 17,
+      "name": "The Star",
+      "nameZh": "星星",
+      "keywords": [
+        "hope",
+        "faith",
+        "renewal"
+      ],
+      "keywordsReversed": [
+        "lack of faith",
+        "despair",
+        "self-trust"
+      ],
+      "image": "assets/cards/17-star.png",
+      "shortName": {
+        "zh-CN": "星星",
+        "en-US": "Star",
+        "fr-FR": "Étoile",
+        "es-ES": "Estrella"
+      }
+    },
+    {
+      "id": 18,
+      "name": "The Moon",
+      "nameZh": "月亮",
+      "keywords": [
+        "illusion",
+        "fear",
+        "subconscious"
+      ],
+      "keywordsReversed": [
+        "release of fear",
+        "repressed emotion",
+        "inner confusion"
+      ],
+      "image": "assets/cards/18-moon.png",
+      "shortName": {
+        "zh-CN": "月亮",
+        "en-US": "Moon",
+        "fr-FR": "Lune",
+        "es-ES": "Luna"
+      }
+    },
+    {
+      "id": 19,
+      "name": "The Sun",
+      "nameZh": "太阳",
+      "keywords": [
+        "positivity",
+        "fun",
+        "warmth"
+      ],
+      "keywordsReversed": [
+        "inner child",
+        "feeling down",
+        "overly optimistic"
+      ],
+      "image": "assets/cards/19-sun.png",
+      "shortName": {
+        "zh-CN": "太阳",
+        "en-US": "Sun",
+        "fr-FR": "Soleil",
+        "es-ES": "Sol"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Judgement",
+      "nameZh": "审判",
+      "keywords": [
+        "judgement",
+        "rebirth",
+        "inner calling"
+      ],
+      "keywordsReversed": [
+        "self-doubt",
+        "inner critic",
+        "ignoring the call"
+      ],
+      "image": "assets/cards/20-judgement.png",
+      "shortName": {
+        "zh-CN": "审判",
+        "en-US": "Judgement",
+        "fr-FR": "Jugement",
+        "es-ES": "Juicio"
+      }
+    },
+    {
+      "id": 21,
+      "name": "The World",
+      "nameZh": "世界",
+      "keywords": [
+        "completion",
+        "integration",
+        "accomplishment"
+      ],
+      "keywordsReversed": [
+        "seeking closure",
+        "shortcuts",
+        "delays"
+      ],
+      "image": "assets/cards/21-world.png",
+      "shortName": {
+        "zh-CN": "世界",
+        "en-US": "World",
+        "fr-FR": "Monde",
+        "es-ES": "Mundo"
+      }
+    }
   ]
 }

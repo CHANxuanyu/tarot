@@ -1,27 +1,47 @@
-const MOON_PHASES = [
-  { symbol: '🌑', name: '新月',   labelEn: 'New Moon' },
-  { symbol: '🌒', name: '娥眉月', labelEn: 'Waxing Crescent' },
-  { symbol: '🌓', name: '上弦月', labelEn: 'First Quarter' },
-  { symbol: '🌔', name: '盈凸月', labelEn: 'Waxing Gibbous' },
-  { symbol: '🌕', name: '满月',   labelEn: 'Full Moon' },
-  { symbol: '🌖', name: '亏凸月', labelEn: 'Waning Gibbous' },
-  { symbol: '🌗', name: '下弦月', labelEn: 'Last Quarter' },
-  { symbol: '🌘', name: '残月',   labelEn: 'Waning Crescent' },
+import { useI18n } from '../i18n/I18nContext';
+import type { TranslationKey } from '../i18n';
+
+const ZODIAC_COIN_SHEET = '/assets/images/zodiac/zodiac-baroque-coin-sheet.png';
+
+const MOON_PHASES: Array<{ symbol: string; nameKey: TranslationKey }> = [
+  { symbol: '🌑', nameKey: 'moon.phase.new' },
+  { symbol: '🌒', nameKey: 'moon.phase.waxingCrescent' },
+  { symbol: '🌓', nameKey: 'moon.phase.firstQuarter' },
+  { symbol: '🌔', nameKey: 'moon.phase.waxingGibbous' },
+  { symbol: '🌕', nameKey: 'moon.phase.full' },
+  { symbol: '🌖', nameKey: 'moon.phase.waningGibbous' },
+  { symbol: '🌗', nameKey: 'moon.phase.lastQuarter' },
+  { symbol: '🌘', nameKey: 'moon.phase.waningCrescent' },
 ];
 
-const ZODIAC_SIGNS = [
-  { symbol: '♈', name: '白羊' },
-  { symbol: '♉', name: '金牛' },
-  { symbol: '♊', name: '双子' },
-  { symbol: '♋', name: '巨蟹' },
-  { symbol: '♌', name: '狮子' },
-  { symbol: '♍', name: '处女' },
-  { symbol: '♎', name: '天秤' },
-  { symbol: '♏', name: '天蝎' },
-  { symbol: '♐', name: '射手' },
-  { symbol: '♑', name: '摩羯' },
-  { symbol: '♒', name: '水瓶' },
-  { symbol: '♓', name: '双鱼' },
+const ZODIAC_SIGNS: Array<{ nameKey: TranslationKey }> = [
+  { nameKey: 'zodiac.aries' },
+  { nameKey: 'zodiac.taurus' },
+  { nameKey: 'zodiac.gemini' },
+  { nameKey: 'zodiac.cancer' },
+  { nameKey: 'zodiac.leo' },
+  { nameKey: 'zodiac.virgo' },
+  { nameKey: 'zodiac.libra' },
+  { nameKey: 'zodiac.scorpio' },
+  { nameKey: 'zodiac.sagittarius' },
+  { nameKey: 'zodiac.capricorn' },
+  { nameKey: 'zodiac.aquarius' },
+  { nameKey: 'zodiac.pisces' },
+];
+
+const ZODIAC_SPRITE_POSITIONS = [
+  '0% 0%',
+  '33.333% 0%',
+  '66.666% 0%',
+  '100% 0%',
+  '0% 50%',
+  '33.333% 50%',
+  '66.666% 50%',
+  '100% 50%',
+  '0% 100%',
+  '33.333% 100%',
+  '66.666% 100%',
+  '100% 100%',
 ];
 
 function getCurrentMoonPhase(): number {
@@ -51,32 +71,41 @@ function getCurrentZodiac(): number {
 }
 
 export function MoonPhasePanel() {
+  const { t } = useI18n();
   const currentPhase = getCurrentMoonPhase();
   const currentZodiac = getCurrentZodiac();
 
   return (
     <>
-      <div className="side-panel-title">月相 · 星宫</div>
+      <div className="side-panel-title">{t('moon.panelTitle')}</div>
 
       <div>
-        <div className="side-panel-title" style={{ fontSize: '0.7rem', marginBottom: '0.8rem' }}>月相之轮</div>
+        <div className="side-panel-title" style={{ fontSize: '0.7rem', marginBottom: '0.8rem' }}>{t('moon.phaseWheel')}</div>
         <div className="moon-phases">
           {MOON_PHASES.map((phase, idx) => (
             <div key={idx} className={`moon-phase-item${idx === currentPhase ? ' current' : ''}`}>
               <span className="moon-phase-symbol">{phase.symbol}</span>
-              <span className="moon-phase-name">{phase.name}</span>
+              <span className="moon-phase-name">{t(phase.nameKey)}</span>
             </div>
           ))}
         </div>
       </div>
 
       <div>
-        <div className="side-panel-title" style={{ fontSize: '0.7rem', marginBottom: '0.8rem' }}>十二星座</div>
+        <div className="side-panel-title" style={{ fontSize: '0.7rem', marginBottom: '0.8rem' }}>{t('moon.zodiac')}</div>
         <div className="zodiac-grid">
           {ZODIAC_SIGNS.map((sign, idx) => (
             <div key={idx} className={`zodiac-item${idx === currentZodiac ? ' current' : ''}`}>
-              <span className="zodiac-symbol">{sign.symbol}</span>
-              <span className="zodiac-name-zh">{sign.name}</span>
+              <span
+                className="zodiac-coin-icon"
+                role="img"
+                aria-label={t(sign.nameKey)}
+                style={{
+                  backgroundImage: `url(${ZODIAC_COIN_SHEET})`,
+                  backgroundPosition: ZODIAC_SPRITE_POSITIONS[idx],
+                }}
+              />
+              <span className="zodiac-name-zh">{t(sign.nameKey)}</span>
             </div>
           ))}
         </div>

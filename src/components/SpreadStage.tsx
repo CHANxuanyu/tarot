@@ -3,10 +3,11 @@ import { useDivinationContext } from '../store/DivinationContext';
 import { getThemeAssetPath } from '../core/ThemeLoader';
 import { playSound } from '../core/AudioManager';
 import { Card } from './Card';
+import { useI18n } from '../i18n/I18nContext';
 
 export function SpreadStage() {
   const { state, dispatch } = useDivinationContext();
-  const copy = state.copy?.lang[state.lang];
+  const { locale, t } = useI18n();
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
   const [transitioning, setTransitioning] = useState(false);
 
@@ -30,7 +31,7 @@ export function SpreadStage() {
 
   return (
     <div className="stage spread-stage">
-      <p className="prompt">{copy?.selectPrompt}</p>
+      <p className="prompt">{t('spread.selectPrompt')}</p>
       <div className="spread-layout">
         {state.drawnCards.map((drawn, idx) => {
           const revealed = revealedIndices.has(idx);
@@ -49,7 +50,9 @@ export function SpreadStage() {
       </div>
       {revealedIndices.size > 0 && revealedIndices.size < state.drawnCards.length && (
         <p className="prompt" style={{ fontSize: '0.9rem', opacity: 0.6 }}>
-          {state.drawnCards.length - revealedIndices.size} remaining...
+          {locale === 'zh-CN'
+            ? `${state.drawnCards.length - revealedIndices.size}${t('spread.remaining')}…`
+            : `${state.drawnCards.length - revealedIndices.size} ${t('spread.remaining')}...`}
         </p>
       )}
     </div>

@@ -27,6 +27,7 @@ export interface CardData {
   id: number;
   name: string;
   nameZh: string;
+  shortName?: Partial<Record<'zh-CN' | 'en-US' | 'fr-FR' | 'es-ES', string>>;
   keywords: string[];
   keywordsReversed: string[];
   image: string;

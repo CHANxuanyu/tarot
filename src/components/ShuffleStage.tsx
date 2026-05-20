@@ -3,16 +3,18 @@ import { useDivinationContext } from '../store/DivinationContext';
 import { shuffleDeck, drawCards } from '../core/DivinationEngine';
 import { getThemeAssetPath } from '../core/ThemeLoader';
 import { playSound } from '../core/AudioManager';
+import { useI18n } from '../i18n/I18nContext';
+import type { TranslationKey } from '../i18n';
 
-const SPREAD_NAMES: Record<string, string> = {
-  'single-card':  '单牌占卜',
-  'three-card':   '三牌阵',
-  'celtic-cross': '凯尔特十字',
+const SPREAD_NAMES: Record<string, TranslationKey> = {
+  'single-card':  'shuffle.single',
+  'three-card':   'shuffle.three',
+  'celtic-cross': 'shuffle.celtic',
 };
 
 export function ShuffleStage() {
   const { state, dispatch } = useDivinationContext();
-  const copy = state.copy?.lang[state.lang];
+  const { locale, t } = useI18n();
   const [phase, setPhase] = useState<'idle' | 'fanning' | 'scattering' | 'gathering'>('idle');
 
   const backSrc = getThemeAssetPath(state.themeId, state.theme?.cardBack || 'assets/back.svg');
@@ -30,7 +32,7 @@ export function ShuffleStage() {
       // Find the selected spread by spreadId
       const spread = state.spreads.spreads.find(s => s.id === state.spreadId)
         || state.spreads.spreads[0];
-      const positions = spread.layout.map(l => state.lang === 'zh' ? l.labelZh : l.label);
+      const positions = spread.layout.map(l => locale === 'zh-CN' ? l.labelZh : l.label);
       const shuffled = shuffleDeck(state.cards.cards);
       const drawn = drawCards(shuffled, spread.positions, positions);
       dispatch({ type: 'SET_DRAWN_CARDS', payload: drawn });
@@ -40,7 +42,7 @@ export function ShuffleStage() {
 
   const cardCount = 7;
   const cards = Array.from({ length: cardCount }, (_, i) => i);
-  const spreadName = SPREAD_NAMES[state.spreadId] || state.spreadId;
+  const spreadName = SPREAD_NAMES[state.spreadId] ? t(SPREAD_NAMES[state.spreadId]) : state.spreadId;
 
   return (
     <div className="stage shuffle-stage">
@@ -55,7 +57,7 @@ export function ShuffleStage() {
       )}
 
       <p className="prompt">
-        {copy?.shufflePrompt || (state.lang === 'zh' ? '请心中默想你的问题，点击洗牌' : 'Focus on your question and shuffle the deck')}
+        {t('shuffle.prompt')}
       </p>
 
       <div className={`deck-area deck-${phase}`}>
@@ -75,7 +77,7 @@ export function ShuffleStage() {
         onClick={handleShuffle}
         disabled={state.stage === 'shuffling'}
       >
-        {state.stage === 'shuffling' ? '✦ ✦ ✦' : `✦ ${copy?.revealButton || '洗牌开始'} ✦`}
+        {state.stage === 'shuffling' ? '✦ ✦ ✦' : `✦ ${t('shuffle.button')} ✦`}
       </button>
     </div>
   );

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDivinationContext } from '../store/DivinationContext';
 import { getThemeAssetPath } from '../core/ThemeLoader';
 import { buildCelticCrossReport } from '../core/TarotReadingEngine';
+import { useI18n } from '../i18n/I18nContext';
 
 interface Props {
   onCopy: () => void;
@@ -12,6 +13,7 @@ interface Props {
 export function ResultCelticCross({ onCopy, onSave }: Props) {
   const navigate = useNavigate();
   const { state, dispatch } = useDivinationContext();
+  const { locale, t } = useI18n();
   const [expandedCards, setExpandedCards] = useState<boolean>(false);
 
   if (state.drawnCards.length < 10) return null;
@@ -19,10 +21,10 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
   const report = buildCelticCrossReport({
     drawnCards: state.drawnCards,
     question: state.question,
+    locale,
   });
 
-  const isZh = state.lang === 'zh';
-  const questionText = state.question || (isZh ? '无特定问题，本次解读将以通用能量为主。' : 'No specific question, reading will focus on general energy.');
+  const questionText = state.question || t('question.none');
 
   const handleReshuffle = () => {
     dispatch({ type: 'RESET' });
@@ -47,9 +49,9 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
   return (
     <div className="celtic-report-layout">
       <div className="celtic-header-section">
-        <h1 className="celtic-main-title">{isZh ? '你的凯尔特十字深度解读报告' : 'Your Celtic Cross Depth Reading'}</h1>
+        <h1 className="celtic-main-title">{t('celtic.title')}</h1>
         <div className="celtic-question-box">
-          <div className="celtic-question-label">{isZh ? '你的问题' : 'YOUR QUERY'}</div>
+          <div className="celtic-question-label">{t('question.labelUpper')}</div>
           <div className="celtic-question-text">{questionText}</div>
         </div>
         <p className="celtic-overview-text">{report.overview}</p>
@@ -88,7 +90,7 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
                 <div className="celtic-mobile-card-info">
                    <div className="celtic-mobile-pos">{rc.positionName}</div>
                    <div className="celtic-mobile-name">
-                     {rc.cardNameZh} {rc.orientation === 'reversed' ? (isZh ? '(逆位)' : '(Rev.)') : ''}
+                     {rc.cardNameZh} {rc.orientation === 'reversed' ? `(${t('orientation.reversed')})` : ''}
                    </div>
                 </div>
              </div>
@@ -98,33 +100,33 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
 
       <div className="celtic-sections-grid">
         <div className="celtic-section-card">
-          <h3 className="celtic-section-title">{isZh ? '核心矛盾' : 'Core Conflict'}</h3>
+          <h3 className="celtic-section-title">{t('section.coreConflict')}</h3>
           <p className="celtic-section-content">{report.sections.coreConflict}</p>
         </div>
         <div className="celtic-section-card">
-          <h3 className="celtic-section-title">{isZh ? '深层原因' : 'Deep Cause'}</h3>
+          <h3 className="celtic-section-title">{t('section.deepCause')}</h3>
           <p className="celtic-section-content">{report.sections.deepCause}</p>
         </div>
         <div className="celtic-section-card">
-          <h3 className="celtic-section-title">{isZh ? '意识与目标' : 'Conscious Direction'}</h3>
+          <h3 className="celtic-section-title">{t('section.consciousDirection')}</h3>
           <p className="celtic-section-content">{report.sections.consciousDirection}</p>
         </div>
         <div className="celtic-section-card">
-          <h3 className="celtic-section-title">{isZh ? '自我与环境' : 'Self & Environment'}</h3>
+          <h3 className="celtic-section-title">{t('section.selfAndEnvironment')}</h3>
           <p className="celtic-section-content">{report.sections.selfAndEnvironment}</p>
         </div>
         <div className="celtic-section-card">
-          <h3 className="celtic-section-title">{isZh ? '情绪张力' : 'Emotional Tension'}</h3>
+          <h3 className="celtic-section-title">{t('section.emotionalTension')}</h3>
           <p className="celtic-section-content">{report.sections.emotionalTension}</p>
         </div>
         <div className="celtic-section-card">
-          <h3 className="celtic-section-title">{isZh ? '未来趋势' : 'Future Trend'}</h3>
+          <h3 className="celtic-section-title">{t('section.futureTrend')}</h3>
           <p className="celtic-section-content">{report.sections.futureTrend}</p>
         </div>
       </div>
 
       <div className="celtic-final-advice">
-         <h3 className="celtic-section-title">{isZh ? '最终建议' : 'Final Advice'}</h3>
+         <h3 className="celtic-section-title">{t('section.finalAdvice')}</h3>
          <p className="celtic-section-content">{report.sections.finalAdvice}</p>
       </div>
 
@@ -136,8 +138,8 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
       <div className="celtic-details-toggle">
          <button className="celtic-toggle-btn" onClick={() => setExpandedCards(!expandedCards)}>
             {expandedCards 
-              ? (isZh ? '收起单牌细读' : 'Hide Card Details') 
-              : (isZh ? '展开十张牌细读' : 'View All 10 Card Details')}
+              ? t('button.collapseCardDetails')
+              : t('button.expandCardDetails')}
          </button>
       </div>
       
@@ -148,7 +150,7 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
                <div className="celtic-detail-header">
                   <span className="celtic-detail-pos">{c.positionName}</span>
                   <span className="celtic-detail-name">
-                    {c.cardNameZh} {c.orientation === 'reversed' ? (isZh ? '(逆位)' : '(Rev.)') : ''}
+                    {c.cardNameZh} {c.orientation === 'reversed' ? `(${t('orientation.reversed')})` : ''}
                   </span>
                </div>
                <div className="celtic-detail-text">{c.positionReading}</div>
@@ -159,13 +161,13 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
 
       <div className="celtic-report-actions">
         <button className="cc-action-btn" onClick={handleReshuffle}>
-          {isZh ? '重新抽牌' : 'Reshuffle'}
+          {t('button.reshuffle')}
         </button>
         <button className="cc-action-btn primary" onClick={onCopy}>
-          {isZh ? '复制全文' : 'Copy Full Report'}
+          {t('button.copyFull')}
         </button>
         <button className="cc-action-btn" onClick={onSave}>
-          {isZh ? '保存解读' : 'Save Reading'}
+          {t('button.saveReading')}
         </button>
       </div>
     </div>

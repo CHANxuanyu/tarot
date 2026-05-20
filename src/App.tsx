@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DivinationProvider, useDivinationContext } from './store/DivinationContext';
+import { I18nProvider, useI18n } from './i18n/I18nContext';
 import { loadTheme, applyThemeCSS } from './core/ThemeLoader';
 import { setMuted } from './core/AudioManager';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -18,12 +19,13 @@ import './styles.css';
 
 function ReadingPage() {
   const { state } = useDivinationContext();
+  const { t } = useI18n();
 
   if (state.stage === 'loading') {
     return (
       <div className="loading">
         <div className="loading-symbol">✦</div>
-        <div className="loading-text">正在加载…</div>
+        <div className="loading-text">{t('loading.default')}</div>
       </div>
     );
   }
@@ -41,6 +43,7 @@ function ReadingPage() {
 
 function AppInner() {
   const { state, dispatch } = useDivinationContext();
+  const { t } = useI18n();
 
   useEffect(() => {
     loadTheme(state.themeId).then(data => {
@@ -57,7 +60,7 @@ function AppInner() {
     return (
       <div className="loading">
         <div className="loading-symbol">✦</div>
-        <div className="loading-text">正在加载神秘能量…</div>
+        <div className="loading-text">{t('loading.mystic')}</div>
       </div>
     );
   }
@@ -82,11 +85,13 @@ function AppInner() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <DivinationProvider>
-        <BrowserRouter>
-          <AppInner />
-        </BrowserRouter>
-      </DivinationProvider>
+      <I18nProvider>
+        <DivinationProvider>
+          <BrowserRouter>
+            <AppInner />
+          </BrowserRouter>
+        </DivinationProvider>
+      </I18nProvider>
     </ErrorBoundary>
   );
 }
