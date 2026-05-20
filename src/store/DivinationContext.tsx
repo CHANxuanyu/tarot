@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
-import type { ThemeConfig, CardsConfig, CopyConfig, SpreadsConfig, DrawnCard } from '../core/types';
+import type { ThemeConfig, CardsConfig, CopyConfig, SpreadsConfig, DrawnCard, SpreadId } from '../core/types';
 
 export type DivinationMode = 'tarot' | 'iching';
 type Stage = 'loading' | 'idle' | 'shuffling' | 'selecting' | 'revealing' | 'casting' | 'result';
@@ -14,6 +14,7 @@ interface State {
   spreads: SpreadsConfig | null;
   drawnCards: DrawnCard[];
   question: string;
+  spreadId: SpreadId;
   lang: 'en' | 'zh';
   darkMode: boolean;
   soundEnabled: boolean;
@@ -27,6 +28,7 @@ type Action =
   | { type: 'SET_STAGE'; payload: Stage }
   | { type: 'SET_DRAWN_CARDS'; payload: DrawnCard[] }
   | { type: 'SET_QUESTION'; payload: string }
+  | { type: 'SET_SPREAD'; payload: SpreadId }
   | { type: 'SET_HEXAGRAM'; payload: number[] }
   | { type: 'SET_LANG'; payload: 'en' | 'zh' }
   | { type: 'TOGGLE_DARK_MODE' }
@@ -48,8 +50,9 @@ const initialState: State = {
   spreads: null,
   drawnCards: [],
   question: '',
+  spreadId: 'single-card',
   hexagram: null,
-  lang: 'en',
+  lang: 'zh',
   darkMode: true,
   soundEnabled: true,
 };
@@ -70,6 +73,8 @@ function reducer(state: State, action: Action): State {
       return { ...state, drawnCards: action.payload };
     case 'SET_QUESTION':
       return { ...state, question: action.payload };
+    case 'SET_SPREAD':
+      return { ...state, spreadId: action.payload };
     case 'SET_HEXAGRAM':
       return { ...state, hexagram: action.payload };
     case 'SET_LANG':

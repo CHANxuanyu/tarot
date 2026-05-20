@@ -39,7 +39,7 @@ export function HistoryDrawer() {
           <div className="history-drawer" onClick={e => e.stopPropagation()}>
             <div className="history-header">
               <h3>{copy?.history || 'History'}</h3>
-              <button className="control-btn" onClick={() => setOpen(false)}>✕</button>
+              <button className="nav-btn" onClick={() => setOpen(false)}>✕</button>
             </div>
 
             {records.length === 0 ? (

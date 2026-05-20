@@ -1,3 +1,5 @@
+export type SpreadId = 'single-card' | 'three-card' | 'celtic-cross';
+
 export interface ThemeColors {
   bg: string;
   bgSecondary: string;
