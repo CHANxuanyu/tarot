@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDivinationContext } from '../store/DivinationContext';
 import { getThemeAssetPath } from '../core/ThemeLoader';
@@ -11,12 +12,17 @@ interface Props {
 export function ResultCelticCross({ onCopy, onSave }: Props) {
   const navigate = useNavigate();
   const { state, dispatch } = useDivinationContext();
+  const [expandedCards, setExpandedCards] = useState<boolean>(false);
+
   if (state.drawnCards.length < 10) return null;
 
   const report = buildCelticCrossReport({
     drawnCards: state.drawnCards,
     question: state.question,
   });
+
+  const isZh = state.lang === 'zh';
+  const questionText = state.question || (isZh ? '无特定问题，本次解读将以通用能量为主。' : 'No specific question, reading will focus on general energy.');
 
   const handleReshuffle = () => {
     dispatch({ type: 'RESET' });
@@ -25,107 +31,141 @@ export function ResultCelticCross({ onCopy, onSave }: Props) {
 
   const getImg = (idx: number) => getThemeAssetPath(state.themeId, state.drawnCards[idx].card.image);
 
-  function CcCard({ idx, className, small = false }: { idx: number; className: string; small?: boolean }) {
+  function CcCard({ idx, className }: { idx: number; className: string }) {
     const drawn = state.drawnCards[idx];
+    const rCard = report.cards[idx];
     return (
       <div className={className}>
-        <div className={`cc-card-wrap${small ? ' small' : ''}${drawn.reversed ? ' reversed' : ''}`}>
-          <img src={getImg(idx)} alt={drawn.card.nameZh} />
-          <div className="cc-pos-label">{report.cards[idx].positionName}</div>
+        <div className={`celtic-map-card-wrap${drawn.reversed ? ' reversed' : ''}`}>
+          <img src={getImg(idx)} alt={rCard.cardNameZh} />
+          <div className="celtic-map-pos-label">{rCard.positionName}</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="celtic-result" style={{ paddingTop: '2rem' }}>
-      <div>
-        <div className="gold-heading">{state.lang === 'zh' ? '凯尔特十字解读' : 'CELTIC CROSS READING'}</div>
-        <div className="gold-heading-en">TEN POSITIONS · COMPLETE GUIDANCE</div>
+    <div className="celtic-report-layout">
+      <div className="celtic-header-section">
+        <h1 className="celtic-main-title">{isZh ? '你的凯尔特十字深度解读报告' : 'Your Celtic Cross Depth Reading'}</h1>
+        <div className="celtic-question-box">
+          <div className="celtic-question-label">{isZh ? '你的问题' : 'YOUR QUERY'}</div>
+          <div className="celtic-question-text">{questionText}</div>
+        </div>
+        <p className="celtic-overview-text">{report.overview}</p>
       </div>
 
-      <div className="celtic-body">
-        {/* The Cross + Staff grid */}
-        <div className="celtic-grid-wrap">
-          <div className="celtic-grid">
-            <CcCard idx={4} className="cc-crown" />
-            <CcCard idx={3} className="cc-past" />
-            {/* Center: position 0 (present) + position 1 (challenge rotated) */}
-            <div className="cc-center">
-              <div className="cc-card-wrap" style={{ width: '100px', height: '160px' }}>
-                <img src={getImg(0)} alt={state.drawnCards[0].card.nameZh} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                <div className="cc-pos-label">{report.cards[0].positionName}</div>
-              </div>
-              <div className="cc-challenge">
-                <div className="cc-card-wrap small" style={{ position: 'relative', top: 'unset', left: 'unset', transform: 'none' }}>
-                  <img src={getImg(1)} alt={state.drawnCards[1].card.nameZh} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: 0.9 }} />
-                </div>
+      <div className="celtic-map-section">
+        <div className="celtic-grid-desktop">
+          <CcCard idx={4} className="cc-crown" />
+          <CcCard idx={3} className="cc-past" />
+          <div className="cc-center">
+            <div className={`celtic-map-card-wrap${state.drawnCards[0].reversed ? ' reversed' : ''}`}>
+              <img src={getImg(0)} alt={report.cards[0].cardNameZh} />
+              <div className="celtic-map-pos-label">{report.cards[0].positionName}</div>
+            </div>
+            <div className="cc-challenge">
+              <div className={`celtic-map-card-wrap crossed${state.drawnCards[1].reversed ? ' reversed' : ''}`}>
+                <img src={getImg(1)} alt={report.cards[1].cardNameZh} />
               </div>
             </div>
-            <CcCard idx={5} className="cc-future" />
-            <CcCard idx={2} className="cc-foundation" />
-            <div className="cc-spacer" />
-            <CcCard idx={9} className="cc-outcome" />
-            <CcCard idx={8} className="cc-hopes" />
-            <CcCard idx={7} className="cc-environ" />
-            <CcCard idx={6} className="cc-self" />
           </div>
+          <CcCard idx={5} className="cc-future" />
+          <CcCard idx={2} className="cc-foundation" />
+          <div className="cc-spacer" />
+          <CcCard idx={9} className="cc-outcome" />
+          <CcCard idx={8} className="cc-hopes" />
+          <CcCard idx={7} className="cc-environ" />
+          <CcCard idx={6} className="cc-self" />
         </div>
 
-        {/* Position interpretations */}
-        <div className="celtic-interpretations">
-          <div className="celtic-interp-item">
-            <div className="celtic-interp-header">
-              <div className="celtic-interp-pos">{state.lang === 'zh' ? '总览' : 'Overview'}</div>
-            </div>
-            <div className="celtic-interp-text">{report.overview}</div>
-          </div>
-
-          {report.cards.map((card, idx) => (
-            <div key={idx} className="celtic-interp-item">
-              <div className="celtic-interp-header">
-                <div className="celtic-interp-num">{idx + 1}</div>
-                <div className="celtic-interp-pos">{card.positionName}</div>
-                <div className="celtic-interp-card">
-                  {card.cardNameZh}
-                  {card.orientation === 'reversed'
-                    ? (state.lang === 'zh' ? ' 逆' : ' Rev.')
-                    : (state.lang === 'zh' ? ' 正' : '')}
+        <div className="celtic-map-mobile">
+          {report.cards.map((rc, idx) => (
+             <div key={idx} className="celtic-mobile-card-row">
+                <div className="celtic-mobile-card-img">
+                   <img src={getImg(idx)} alt={rc.cardNameZh} className={state.drawnCards[idx].reversed ? 'reversed' : ''} />
                 </div>
-              </div>
-              <div className="celtic-interp-text">{card.positionReading}</div>
+                <div className="celtic-mobile-card-info">
+                   <div className="celtic-mobile-pos">{rc.positionName}</div>
+                   <div className="celtic-mobile-name">
+                     {rc.cardNameZh} {rc.orientation === 'reversed' ? (isZh ? '(逆位)' : '(Rev.)') : ''}
+                   </div>
+                </div>
+             </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="celtic-sections-grid">
+        <div className="celtic-section-card">
+          <h3 className="celtic-section-title">{isZh ? '核心矛盾' : 'Core Conflict'}</h3>
+          <p className="celtic-section-content">{report.sections.coreConflict}</p>
+        </div>
+        <div className="celtic-section-card">
+          <h3 className="celtic-section-title">{isZh ? '深层原因' : 'Deep Cause'}</h3>
+          <p className="celtic-section-content">{report.sections.deepCause}</p>
+        </div>
+        <div className="celtic-section-card">
+          <h3 className="celtic-section-title">{isZh ? '意识与目标' : 'Conscious Direction'}</h3>
+          <p className="celtic-section-content">{report.sections.consciousDirection}</p>
+        </div>
+        <div className="celtic-section-card">
+          <h3 className="celtic-section-title">{isZh ? '自我与环境' : 'Self & Environment'}</h3>
+          <p className="celtic-section-content">{report.sections.selfAndEnvironment}</p>
+        </div>
+        <div className="celtic-section-card">
+          <h3 className="celtic-section-title">{isZh ? '情绪张力' : 'Emotional Tension'}</h3>
+          <p className="celtic-section-content">{report.sections.emotionalTension}</p>
+        </div>
+        <div className="celtic-section-card">
+          <h3 className="celtic-section-title">{isZh ? '未来趋势' : 'Future Trend'}</h3>
+          <p className="celtic-section-content">{report.sections.futureTrend}</p>
+        </div>
+      </div>
+
+      <div className="celtic-final-advice">
+         <h3 className="celtic-section-title">{isZh ? '最终建议' : 'Final Advice'}</h3>
+         <p className="celtic-section-content">{report.sections.finalAdvice}</p>
+      </div>
+
+      <div className="celtic-report-quote">
+        <div className="celtic-quote-icon">“</div>
+        <div className="celtic-quote-text">{report.sections.quote}</div>
+      </div>
+
+      <div className="celtic-details-toggle">
+         <button className="celtic-toggle-btn" onClick={() => setExpandedCards(!expandedCards)}>
+            {expandedCards 
+              ? (isZh ? '收起单牌细读' : 'Hide Card Details') 
+              : (isZh ? '展开十张牌细读' : 'View All 10 Card Details')}
+         </button>
+      </div>
+      
+      {expandedCards && (
+        <div className="celtic-details-grid">
+          {report.cards.map((c, idx) => (
+            <div key={idx} className="celtic-detail-item">
+               <div className="celtic-detail-header">
+                  <span className="celtic-detail-pos">{c.positionName}</span>
+                  <span className="celtic-detail-name">
+                    {c.cardNameZh} {c.orientation === 'reversed' ? (isZh ? '(逆位)' : '(Rev.)') : ''}
+                  </span>
+               </div>
+               <div className="celtic-detail-text">{c.positionReading}</div>
             </div>
           ))}
-
-          <div className="celtic-interp-item">
-            <div className="celtic-interp-header">
-              <div className="celtic-interp-pos">{state.lang === 'zh' ? '分区报告' : 'Section Report'}</div>
-            </div>
-            <div className="celtic-interp-text">
-              {report.sections.coreConflict}
-              {'\n\n'}{report.sections.deepCause}
-              {'\n\n'}{report.sections.consciousDirection}
-              {'\n\n'}{report.sections.selfAndEnvironment}
-              {'\n\n'}{report.sections.emotionalTension}
-              {'\n\n'}{report.sections.futureTrend}
-              {'\n\n'}{report.sections.finalAdvice}
-            </div>
-          </div>
         </div>
-      </div>
+      )}
 
-      <div className="result-actions">
-        <button className="jewel-btn" onClick={handleReshuffle}>
-          <span className="jewel-btn-icon">⟳</span>
-          {state.lang === 'zh' ? '重新洗牌' : 'Reshuffle'}
+      <div className="celtic-report-actions">
+        <button className="cc-action-btn" onClick={handleReshuffle}>
+          {isZh ? '重新抽牌' : 'Reshuffle'}
         </button>
-        <button className="jewel-btn" onClick={onCopy}>
-          <span className="jewel-btn-icon">⧉</span>
-          {state.lang === 'zh' ? '复制结果' : 'Copy Result'}
+        <button className="cc-action-btn primary" onClick={onCopy}>
+          {isZh ? '复制全文' : 'Copy Full Report'}
         </button>
-        <button className="jewel-btn" onClick={onSave}>
-          <span className="jewel-btn-icon">✦</span>
-          {state.lang === 'zh' ? '保存到日记' : 'Save to Diary'}
+        <button className="cc-action-btn" onClick={onSave}>
+          {isZh ? '保存解读' : 'Save Reading'}
         </button>
       </div>
     </div>

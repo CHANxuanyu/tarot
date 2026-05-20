@@ -1443,151 +1443,411 @@ body {
 }
 
 /* =============================================
-   RESULT — CELTIC CROSS
+   RESULT — CELTIC CROSS REPORT
    ============================================= */
-.celtic-result {
-  width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
+.celtic-report-layout {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
   padding: 2rem;
-  animation: fade-in 0.5s ease;
+  animation: fade-in 0.6s ease;
 }
 
-.celtic-body {
+.celtic-header-section {
+  text-align: center;
   display: flex;
-  gap: 2.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
 }
 
-.celtic-grid-wrap {
+.celtic-main-title {
+  font-family: var(--font-zh);
+  font-size: 1.8rem;
+  color: var(--gold-bright);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.celtic-question-box {
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius-sm);
+  background: rgba(8, 22, 14, 0.6);
+  padding: 1rem;
   position: relative;
+  width: min(100%, 680px);
 }
 
-.celtic-grid {
+.celtic-question-box::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  pointer-events: none;
+}
+
+.celtic-question-label {
+  font-family: var(--font-zh);
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.4rem;
+}
+
+.celtic-question-text {
+  font-family: var(--font-zh);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.celtic-overview-text {
+  font-family: var(--font-zh);
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+  max-width: 800px;
+  background: rgba(201, 168, 76, 0.05);
+  padding: 1.5rem;
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  text-align: left;
+}
+
+.celtic-map-section {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.celtic-grid-desktop {
   display: grid;
-  grid-template-columns: 100px 100px 100px 40px 100px;
-  grid-template-rows: 160px 160px 160px 160px;
-  gap: 8px;
+  grid-template-columns: 110px 110px 110px 40px 110px;
+  grid-template-rows: 176px 176px 176px 176px;
+  gap: 12px;
 }
 
-/* Celtic Cross positions */
-.cc-crown     { grid-column: 2; grid-row: 1; }
-.cc-past      { grid-column: 1; grid-row: 2; }
-.cc-center    { grid-column: 2; grid-row: 2; position: relative; }
-.cc-future    { grid-column: 3; grid-row: 2; }
-.cc-foundation{ grid-column: 2; grid-row: 3; }
+.cc-crown     { grid-column: 2; grid-row: 1; justify-self: center; }
+.cc-past      { grid-column: 1; grid-row: 2; justify-self: center; }
+.cc-center    { grid-column: 2; grid-row: 2; position: relative; justify-self: center; }
+.cc-future    { grid-column: 3; grid-row: 2; justify-self: center; }
+.cc-foundation{ grid-column: 2; grid-row: 3; justify-self: center; }
 .cc-spacer    { grid-column: 4; grid-row: 1 / span 4; }
-.cc-outcome   { grid-column: 5; grid-row: 1; }
-.cc-hopes     { grid-column: 5; grid-row: 2; }
-.cc-environ   { grid-column: 5; grid-row: 3; }
-.cc-self      { grid-column: 5; grid-row: 4; }
+.cc-outcome   { grid-column: 5; grid-row: 1; justify-self: center; }
+.cc-hopes     { grid-column: 5; grid-row: 2; justify-self: center; }
+.cc-environ   { grid-column: 5; grid-row: 3; justify-self: center; }
+.cc-self      { grid-column: 5; grid-row: 4; justify-self: center; }
 
 .cc-challenge {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%) rotate(90deg);
   z-index: 2;
   transform-origin: center center;
 }
 
-.cc-card-wrap {
-  width: 100px;
-  height: 160px;
-  border: 1px solid var(--gold-dim);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: 0 0 12px var(--gold-glow);
+.celtic-map-card-wrap {
+  width: 110px;
+  height: 176px;
   position: relative;
-  cursor: default;
-}
-
-.cc-card-wrap.small {
-  width: 86px;
-  height: 136px;
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) rotate(90deg);
-}
-
-.cc-card-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.cc-card-wrap.reversed img { transform: rotate(180deg); }
-
-.cc-pos-label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: rgba(5, 14, 8, 0.85);
-  color: var(--gold);
-  font-family: var(--font-zh);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-align: center;
-  padding: 0.2rem 0;
-}
-
-.celtic-interpretations {
-  flex: 1;
-  min-width: 280px;
-  max-width: 380px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  max-height: 700px;
-  overflow-y: auto;
-  padding-right: 0.4rem;
-}
-
-.celtic-interp-item {
   border: 1px solid var(--gold-dim);
   border-radius: var(--radius-sm);
-  padding: 0.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   background: var(--bg-panel);
 }
 
-.celtic-interp-header {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.4rem;
+.celtic-map-card-wrap.crossed {
+  width: 100px;
+  height: 160px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-.celtic-interp-num {
-  width: 22px;
-  height: 22px;
+.celtic-map-card-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius-sm) - 1px);
+  display: block;
+}
+
+.celtic-map-card-wrap.reversed img {
+  transform: rotate(180deg);
+}
+
+.celtic-map-pos-label {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-deep);
+  border: 1px solid var(--gold);
+  color: var(--gold-bright);
+  font-family: var(--font-zh);
+  font-size: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.celtic-map-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.celtic-mobile-card-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(8, 22, 14, 0.4);
   border: 1px solid var(--gold-dim);
-  border-radius: 50%;
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+}
+
+.celtic-mobile-card-img {
+  width: 48px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--gold-dim);
+}
+
+.celtic-mobile-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.celtic-mobile-card-img img.reversed {
+  transform: rotate(180deg);
+}
+
+.celtic-mobile-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.celtic-mobile-pos {
+  font-family: var(--font-zh);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.celtic-mobile-name {
+  font-family: var(--font-zh);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.celtic-sections-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.celtic-section-card,
+.celtic-final-advice {
+  background: rgba(201, 168, 76, 0.03);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.celtic-final-advice {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.08) 0%, rgba(8, 22, 14, 0) 100%);
+  border: 1px solid var(--gold-dim);
+  border-left: 2px solid var(--gold);
+}
+
+.celtic-section-title {
+  font-family: var(--font-zh);
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: 400;
+  letter-spacing: 0.05em;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 0.65rem;
-  color: var(--gold);
-  flex-shrink: 0;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
-.celtic-interp-pos {
-  font-family: var(--font-zh);
-  font-size: 0.78rem;
-  color: var(--gold);
-  font-weight: 600;
+.celtic-section-title::before {
+  content: '✦';
+  font-size: 0.8rem;
+  color: var(--gold-dim);
 }
 
-.celtic-interp-card {
+.celtic-section-content,
+.celtic-detail-text {
   font-family: var(--font-zh);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-left: auto;
-}
-
-.celtic-interp-text {
-  font-family: var(--font-zh);
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   color: var(--text-primary);
   line-height: 1.8;
   font-weight: 300;
+  white-space: pre-wrap;
+}
+
+.celtic-report-quote {
+  margin: 1rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius-md);
+  position: relative;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.celtic-quote-icon {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--gold-glow);
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  opacity: 0.4;
+}
+
+.celtic-quote-text {
+  font-family: var(--font-zh);
+  font-size: 1.1rem;
+  color: var(--gold-bright);
+  line-height: 1.6;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.celtic-details-toggle {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.celtic-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  font-family: var(--font-zh);
+  font-size: 0.85rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.05em;
+}
+
+.celtic-toggle-btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: var(--gold);
+  color: var(--gold-bright);
+}
+
+.celtic-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  animation: fade-in 0.4s ease;
+}
+
+.celtic-detail-item {
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
+  padding-top: 1rem;
+}
+
+.celtic-detail-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.celtic-detail-pos {
+  font-family: var(--font-zh);
+  font-size: 0.75rem;
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.1);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+}
+
+.celtic-detail-name {
+  font-family: var(--font-zh);
+  font-size: 0.95rem;
+  color: var(--gold-bright);
+}
+
+.celtic-report-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--gold-dim);
+  padding-top: 2rem;
+}
+
+.cc-action-btn {
+  flex: 1;
+  padding: 0.8rem;
+  font-family: var(--font-zh);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  background: rgba(8, 22, 14, 0.8);
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: center;
+}
+
+.cc-action-btn:hover {
+  background: var(--gold-glow);
+  color: var(--gold-bright);
+  border-color: var(--gold);
+}
+
+.cc-action-btn.primary {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--gold-bright);
+  border-color: var(--gold);
+}
+
+.cc-action-btn.primary:hover {
+  background: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 0 16px var(--gold-glow);
+}
+
+@media (max-width: 768px) {
+  .celtic-report-layout {
+    gap: 2.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .celtic-grid-desktop {
+    display: none;
+  }
+
+  .celtic-map-mobile {
+    display: flex;
+  }
+
+  .celtic-sections-grid,
+  .celtic-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .celtic-report-actions {
+    flex-direction: column;
+  }
 }
 
 /* =============================================
@@ -2347,7 +2607,6 @@ body {
   .zodiac-layout { grid-template-columns: 1fr; }
   .learn-layout { grid-template-columns: 1fr; }
   .about-columns { grid-template-columns: 1fr; }
-  .celtic-body   { flex-direction: column; align-items: center; }
 }
 
 @media (max-width: 640px) {
@@ -2357,10 +2616,5 @@ body {
   .home-arch-container { width: 220px; height: 220px; }
   .three-card-grid { gap: 1rem; }
   .arch-card-wrap  { width: 120px; height: 192px; }
-  .celtic-grid {
-    grid-template-columns: 80px 80px 80px 24px 80px;
-    grid-template-rows: 130px 130px 130px 130px;
-  }
-  .cc-card-wrap { width: 80px; height: 130px; }
   .zodiac-wheel-svg { width: 240px; height: 240px; }
 }
