@@ -1,14 +1,41 @@
 {
   "spreads": [
     {
+      "id": "single-card",
+      "name": "Single Card",
+      "nameZh": "单牌占卜",
+      "positions": 1,
+      "layout": [
+        { "label": "The Present", "labelZh": "当下启示", "x": 0, "y": 0 }
+      ]
+    },
+    {
       "id": "three-card",
       "name": "Three Card Spread",
-      "nameZh": "三张牌阵",
+      "nameZh": "三牌阵",
       "positions": 3,
       "layout": [
         { "label": "Past", "labelZh": "过去", "x": 0, "y": 0 },
         { "label": "Present", "labelZh": "现在", "x": 1, "y": 0 },
         { "label": "Future", "labelZh": "未来", "x": 2, "y": 0 }
+      ]
+    },
+    {
+      "id": "celtic-cross",
+      "name": "Celtic Cross",
+      "nameZh": "凯尔特十字",
+      "positions": 10,
+      "layout": [
+        { "label": "Present",     "labelZh": "现状", "x": 2, "y": 2 },
+        { "label": "Challenge",   "labelZh": "交叉", "x": 2, "y": 2 },
+        { "label": "Foundation",  "labelZh": "根基", "x": 2, "y": 3 },
+        { "label": "Crown",       "labelZh": "顶部", "x": 2, "y": 1 },
+        { "label": "Past",        "labelZh": "过去", "x": 1, "y": 2 },
+        { "label": "Near Future", "labelZh": "即将", "x": 3, "y": 2 },
+        { "label": "Self",        "labelZh": "自我", "x": 5, "y": 4 },
+        { "label": "Environment", "labelZh": "环境", "x": 5, "y": 3 },
+        { "label": "Hopes",       "labelZh": "希望", "x": 5, "y": 2 },
+        { "label": "Outcome",     "labelZh": "结局", "x": 5, "y": 1 }
       ]
     }
   ]
