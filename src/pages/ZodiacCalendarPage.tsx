@@ -189,6 +189,129 @@ const MOON_INFLUENCES: Array<LocalizedText> = [
   { 'zh-CN': '残月：休息更新，清空空间，准备新周期。', 'en-US': 'Waning Crescent: rest, clear space, and prepare quietly for renewal.', 'fr-FR': 'Dernier croissant : reposez-vous, libérez de l’espace et préparez le renouveau.', 'es-ES': 'Luna menguante: descansa, despeja espacio y prepara la renovación.' },
 ];
 
+function MoonCalendarSection({
+  dateStr,
+  weekdayLabels,
+  moonCalendarCells,
+  selectedMoonDay,
+  selectedMoon,
+  selectedPhaseIdx,
+  today,
+  year,
+  month,
+  dayFormatter,
+  locale,
+  t,
+  onSelectDay,
+}: {
+  dateStr: string;
+  weekdayLabels: string[];
+  moonCalendarCells: Array<{ day: number; phaseIdx: number } | null>;
+  selectedMoonDay: number;
+  selectedMoon?: { day: number; phaseIdx: number };
+  selectedPhaseIdx: number;
+  today: number;
+  year: number;
+  month: number;
+  dayFormatter: Intl.DateTimeFormat;
+  locale: Locale;
+  t: (key: TranslationKey) => string;
+  onSelectDay: (day: number) => void;
+}) {
+  return (
+    <div className="moon-calendar">
+      <div className="moon-cal-title">{t('calendar.moonCalendar')}</div>
+      <div className="moon-cal-month">{dateStr}</div>
+      <div className="moon-calendar-mini">
+        <div className="moon-weekdays" aria-hidden="true">
+          {weekdayLabels.map(day => <span key={day}>{day}</span>)}
+        </div>
+        <div className="moon-month-grid">
+          {moonCalendarCells.map((cell, index) => {
+            if (!cell) {
+              return <span key={`empty-${index}`} className="moon-day-cell empty" />;
+            }
+
+            const phaseName = t(MOON_PHASE_KEYS[cell.phaseIdx]);
+            const cellDate = new Date(year, month - 1, cell.day);
+            const isToday = cell.day === today;
+            const isSelected = cell.day === selectedMoonDay;
+
+            return (
+              <button
+                key={cell.day}
+                type="button"
+                className={`moon-day-cell${isToday ? ' today' : ''}${isSelected ? ' selected' : ''}`}
+                title={`${dayFormatter.format(cellDate)} · ${phaseName}`}
+                aria-label={`${dayFormatter.format(cellDate)} · ${phaseName}`}
+                onClick={() => onSelectDay(cell.day)}
+              >
+                <span className="moon-day-number">{cell.day}</span>
+                <span className="moon-day-icon">{MOON_SYMBOLS[cell.phaseIdx]}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="moon-selected-detail">
+        <div className="moon-selected-date">
+          {dayFormatter.format(new Date(year, month - 1, selectedMoon?.day ?? today))}
+        </div>
+        <div className="moon-selected-phase">
+          <span>{MOON_SYMBOLS[selectedPhaseIdx]}</span>
+          {t(MOON_PHASE_KEYS[selectedPhaseIdx])}
+        </div>
+      </div>
+      <div className="moon-influence">
+        <span style={{ color: 'var(--gold)', fontWeight: 600 }}>{t('calendar.moonInfluence')}:</span>
+        <br />{pickText(MOON_INFLUENCES[selectedPhaseIdx], locale)}
+      </div>
+    </div>
+  );
+}
+
+function ZodiacDetailSection({
+  sign,
+  zodiacIdx,
+  locale,
+  t,
+}: {
+  sign: ZodiacSign;
+  zodiacIdx: number;
+  locale: Locale;
+  t: (key: TranslationKey) => string;
+}) {
+  return (
+    <div className="daily-reading-panel">
+      <div className="daily-sign-header">
+        <div className="daily-sign-sym" style={{ width: '80px', height: '80px', margin: '0 auto', borderRadius: '50%', backgroundImage: `url(${ZODIAC_COIN_SHEET})`, backgroundPosition: ZODIAC_SPRITE_POSITIONS[zodiacIdx], backgroundSize: '400% 300%', boxShadow: '0 0 15px rgba(201, 168, 76, 0.3)' }}></div>
+        <div className="daily-sign-name">{t(sign.nameKey)}</div>
+        <div className="daily-keywords">{pickText(sign.keywords, locale)}</div>
+        <div className="daily-planet">{t('today.guardian')}: {pickText(sign.guardian, locale)}</div>
+      </div>
+
+      <div>
+        <div className="guidance-reading-label">{t('calendar.planetPositions')}</div>
+        <div className="planet-list">
+          {PLANETS.map((planet, i) => (
+            <div key={i} className="planet-item">
+              <span className="planet-name">{planet.symbol} {pickText(planet.name, locale)}</span>
+              <span className="planet-pos">{t(planet.signKey)} {planet.deg}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="daily-forecast">{pickText(sign.forecast, locale)}</div>
+
+      <div className="daily-lucky">
+        <div className="lucky-item">{t('today.luckyColor')}: <span>{pickText(sign.colorName, locale)}</span></div>
+        <div className="lucky-item">{t('today.luckyNumber')}: <span>{sign.lucky}</span></div>
+      </div>
+    </div>
+  );
+}
+
 function pickText(text: LocalizedText, locale: Locale): string {
   return text[locale] ?? text['en-US'];
 }
@@ -250,54 +373,21 @@ export function ZodiacCalendarPage() {
     <div className="page">
       <div className="zodiac-layout">
         <aside className="side-panel">
-          <div className="moon-calendar">
-            <div className="moon-cal-title">{t('calendar.moonCalendar')}</div>
-            <div className="moon-cal-month">{dateStr}</div>
-            <div className="moon-calendar-mini">
-              <div className="moon-weekdays" aria-hidden="true">
-                {weekdayLabels.map(day => <span key={day}>{day}</span>)}
-              </div>
-              <div className="moon-month-grid">
-                {moonCalendarCells.map((cell, index) => {
-                  if (!cell) {
-                    return <span key={`empty-${index}`} className="moon-day-cell empty" />;
-                  }
-
-                  const phaseName = t(MOON_PHASE_KEYS[cell.phaseIdx]);
-                  const cellDate = new Date(year, month - 1, cell.day);
-                  const isToday = cell.day === today;
-                  const isSelected = cell.day === selectedMoonDay;
-
-                  return (
-                    <button
-                      key={cell.day}
-                      type="button"
-                      className={`moon-day-cell${isToday ? ' today' : ''}${isSelected ? ' selected' : ''}`}
-                      title={`${dayFormatter.format(cellDate)} · ${phaseName}`}
-                      aria-label={`${dayFormatter.format(cellDate)} · ${phaseName}`}
-                      onClick={() => setSelectedMoonDay(cell.day)}
-                    >
-                      <span className="moon-day-number">{cell.day}</span>
-                      <span className="moon-day-icon">{MOON_SYMBOLS[cell.phaseIdx]}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="moon-selected-detail">
-              <div className="moon-selected-date">
-                {dayFormatter.format(new Date(year, month - 1, selectedMoon?.day ?? today))}
-              </div>
-              <div className="moon-selected-phase">
-                <span>{MOON_SYMBOLS[selectedPhaseIdx]}</span>
-                {t(MOON_PHASE_KEYS[selectedPhaseIdx])}
-              </div>
-            </div>
-            <div className="moon-influence">
-              <span style={{ color: 'var(--gold)', fontWeight: 600 }}>{t('calendar.moonInfluence')}:</span>
-              <br />{pickText(MOON_INFLUENCES[selectedPhaseIdx], locale)}
-            </div>
-          </div>
+          <MoonCalendarSection
+            dateStr={dateStr}
+            weekdayLabels={weekdayLabels}
+            moonCalendarCells={moonCalendarCells}
+            selectedMoonDay={selectedMoonDay}
+            selectedMoon={selectedMoon}
+            selectedPhaseIdx={selectedPhaseIdx}
+            today={today}
+            year={year}
+            month={month}
+            dayFormatter={dayFormatter}
+            locale={locale}
+            t={t}
+            onSelectDay={setSelectedMoonDay}
+          />
         </aside>
 
         <div className="zodiac-center">
@@ -327,34 +417,31 @@ export function ZodiacCalendarPage() {
         </div>
 
         <aside className="side-panel right">
-          <div className="daily-reading-panel">
-            <div className="daily-sign-header">
-              <div className="daily-sign-sym" style={{ width: '80px', height: '80px', margin: '0 auto', borderRadius: '50%', backgroundImage: `url(${ZODIAC_COIN_SHEET})`, backgroundPosition: ZODIAC_SPRITE_POSITIONS[zodiacIdx], backgroundSize: '400% 300%', boxShadow: '0 0 15px rgba(201, 168, 76, 0.3)' }}></div>
-              <div className="daily-sign-name">{t(sign.nameKey)}</div>
-              <div className="daily-keywords">{pickText(sign.keywords, locale)}</div>
-              <div className="daily-planet">{t('today.guardian')}: {pickText(sign.guardian, locale)}</div>
-            </div>
-
-            <div>
-              <div className="guidance-reading-label">{t('calendar.planetPositions')}</div>
-              <div className="planet-list">
-                {PLANETS.map((planet, i) => (
-                  <div key={i} className="planet-item">
-                    <span className="planet-name">{planet.symbol} {pickText(planet.name, locale)}</span>
-                    <span className="planet-pos">{t(planet.signKey)} {planet.deg}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="daily-forecast">{pickText(sign.forecast, locale)}</div>
-
-            <div className="daily-lucky">
-              <div className="lucky-item">{t('today.luckyColor')}: <span>{pickText(sign.colorName, locale)}</span></div>
-              <div className="lucky-item">{t('today.luckyNumber')}: <span>{sign.lucky}</span></div>
-            </div>
-          </div>
+          <ZodiacDetailSection sign={sign} zodiacIdx={zodiacIdx} locale={locale} t={t} />
         </aside>
+
+        <section className="mobile-astro-sections">
+          <div className="mobile-section">
+            <MoonCalendarSection
+              dateStr={dateStr}
+              weekdayLabels={weekdayLabels}
+              moonCalendarCells={moonCalendarCells}
+              selectedMoonDay={selectedMoonDay}
+              selectedMoon={selectedMoon}
+              selectedPhaseIdx={selectedPhaseIdx}
+              today={today}
+              year={year}
+              month={month}
+              dayFormatter={dayFormatter}
+              locale={locale}
+              t={t}
+              onSelectDay={setSelectedMoonDay}
+            />
+          </div>
+          <div className="mobile-section">
+            <ZodiacDetailSection sign={sign} zodiacIdx={zodiacIdx} locale={locale} t={t} />
+          </div>
+        </section>
       </div>
     </div>
   );

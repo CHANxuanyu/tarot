@@ -97,6 +97,15 @@ export function HomePage() {
         <aside className="side-panel right">
           <TodayGuidance />
         </aside>
+
+        <section className="mobile-home-panels">
+          <div className="mobile-section">
+            <TodayGuidance />
+          </div>
+          <div className="mobile-section">
+            <MoonPhasePanel />
+          </div>
+        </section>
       </div>
     </div>
   );
