@@ -1,7 +1,7 @@
 import { useI18n } from '../i18n/I18nContext';
 import type { TranslationKey } from '../i18n';
 
-const ZODIAC_COIN_SHEET = '/assets/images/zodiac/zodiac-baroque-coin-sheet.png';
+const ZODIAC_COIN_SHEET = '/assets/images/zodiac/zodiac-baroque-coin-sheet.jpg';
 
 const MOON_PHASES: Array<{ symbol: string; nameKey: TranslationKey }> = [
   { symbol: '🌑', nameKey: 'moon.phase.new' },

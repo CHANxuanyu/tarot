@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useI18n } from '../i18n/I18nContext';
 import type { Locale, TranslationKey } from '../i18n';
 
-const ZODIAC_COIN_SHEET = '/assets/images/zodiac/zodiac-baroque-coin-sheet.png';
+const ZODIAC_COIN_SHEET = '/assets/images/zodiac/zodiac-baroque-coin-sheet.jpg';
 const ZODIAC_SPRITE_POSITIONS = [
   '0% 0%', '33.333% 0%', '66.666% 0%', '100% 0%',
   '0% 50%', '33.333% 50%', '66.666% 50%', '100% 50%',

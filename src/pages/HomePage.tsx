@@ -56,7 +56,7 @@ export function HomePage() {
 
           <div className="home-arch-container">
             <img
-              src="/assets/images/hero-arch.png"
+              src="/assets/images/hero-arch.jpg"
               alt={t('home.heroAlt')}
               className="home-arch-img"
             />
