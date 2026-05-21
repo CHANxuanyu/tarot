@@ -68,7 +68,7 @@ body {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url('/assets/images/border-texture.png');
+  background-image: url('/assets/images/border-texture.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.08;

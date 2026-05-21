@@ -15,7 +15,7 @@
         "fear",
         "holding back"
       ],
-      "image": "assets/cards/00-fool.png",
+      "image": "assets/cards/00-fool.jpg",
       "shortName": {
         "zh-CN": "愚者",
         "en-US": "Fool",
@@ -37,7 +37,7 @@
         "poor planning",
         "untapped talents"
       ],
-      "image": "assets/cards/01-magician.png",
+      "image": "assets/cards/01-magician.jpg",
       "shortName": {
         "zh-CN": "魔术师",
         "en-US": "Magician",
@@ -59,7 +59,7 @@
         "disconnected",
         "withdrawal"
       ],
-      "image": "assets/cards/02-high-priestess.png",
+      "image": "assets/cards/02-high-priestess.jpg",
       "shortName": {
         "zh-CN": "女祭司",
         "en-US": "High Priestess",
@@ -81,7 +81,7 @@
         "dependence",
         "emptiness"
       ],
-      "image": "assets/cards/03-empress.png",
+      "image": "assets/cards/03-empress.jpg",
       "shortName": {
         "zh-CN": "女皇",
         "en-US": "Empress",
@@ -103,7 +103,7 @@
         "rigidity",
         "lack of discipline"
       ],
-      "image": "assets/cards/04-emperor.png",
+      "image": "assets/cards/04-emperor.jpg",
       "shortName": {
         "zh-CN": "皇帝",
         "en-US": "Emperor",
@@ -125,7 +125,7 @@
         "freedom",
         "challenging status quo"
       ],
-      "image": "assets/cards/05-hierophant.png",
+      "image": "assets/cards/05-hierophant.jpg",
       "shortName": {
         "zh-CN": "教皇",
         "en-US": "Hierophant",
@@ -147,7 +147,7 @@
         "disharmony",
         "imbalance"
       ],
-      "image": "assets/cards/06-lovers.png",
+      "image": "assets/cards/06-lovers.jpg",
       "shortName": {
         "zh-CN": "恋人",
         "en-US": "Lovers",
@@ -169,7 +169,7 @@
         "opposition",
         "lack of direction"
       ],
-      "image": "assets/cards/07-chariot.png",
+      "image": "assets/cards/07-chariot.jpg",
       "shortName": {
         "zh-CN": "战车",
         "en-US": "Chariot",
@@ -191,7 +191,7 @@
         "weakness",
         "insecurity"
       ],
-      "image": "assets/cards/08-strength.png",
+      "image": "assets/cards/08-strength.jpg",
       "shortName": {
         "zh-CN": "力量",
         "en-US": "Strength",
@@ -213,7 +213,7 @@
         "loneliness",
         "withdrawal"
       ],
-      "image": "assets/cards/09-hermit.png",
+      "image": "assets/cards/09-hermit.jpg",
       "shortName": {
         "zh-CN": "隐士",
         "en-US": "Hermit",
@@ -235,7 +235,7 @@
         "resistance to change",
         "breaking cycles"
       ],
-      "image": "assets/cards/10-wheel.png",
+      "image": "assets/cards/10-wheel.jpg",
       "shortName": {
         "zh-CN": "命运之轮",
         "en-US": "Wheel",
@@ -257,7 +257,7 @@
         "dishonesty",
         "lack of accountability"
       ],
-      "image": "assets/cards/11-justice.png",
+      "image": "assets/cards/11-justice.jpg",
       "shortName": {
         "zh-CN": "正义",
         "en-US": "Justice",
@@ -279,7 +279,7 @@
         "resistance",
         "stalling"
       ],
-      "image": "assets/cards/12-hanged-man.png",
+      "image": "assets/cards/12-hanged-man.jpg",
       "shortName": {
         "zh-CN": "吊人",
         "en-US": "Hanged Man",
@@ -301,7 +301,7 @@
         "personal transformation",
         "inner purging"
       ],
-      "image": "assets/cards/13-death.png",
+      "image": "assets/cards/13-death.jpg",
       "shortName": {
         "zh-CN": "死神",
         "en-US": "Death",
@@ -323,7 +323,7 @@
         "excess",
         "self-healing"
       ],
-      "image": "assets/cards/14-temperance.png",
+      "image": "assets/cards/14-temperance.jpg",
       "shortName": {
         "zh-CN": "节制",
         "en-US": "Temperance",
@@ -345,7 +345,7 @@
         "breaking free",
         "restoring control"
       ],
-      "image": "assets/cards/15-devil.png",
+      "image": "assets/cards/15-devil.jpg",
       "shortName": {
         "zh-CN": "恶魔",
         "en-US": "Devil",
@@ -367,7 +367,7 @@
         "fear of change",
         "averting disaster"
       ],
-      "image": "assets/cards/16-tower.png",
+      "image": "assets/cards/16-tower.jpg",
       "shortName": {
         "zh-CN": "塔",
         "en-US": "Tower",
@@ -389,7 +389,7 @@
         "despair",
         "self-trust"
       ],
-      "image": "assets/cards/17-star.png",
+      "image": "assets/cards/17-star.jpg",
       "shortName": {
         "zh-CN": "星星",
         "en-US": "Star",
@@ -411,7 +411,7 @@
         "repressed emotion",
         "inner confusion"
       ],
-      "image": "assets/cards/18-moon.png",
+      "image": "assets/cards/18-moon.jpg",
       "shortName": {
         "zh-CN": "月亮",
         "en-US": "Moon",
@@ -433,7 +433,7 @@
         "feeling down",
         "overly optimistic"
       ],
-      "image": "assets/cards/19-sun.png",
+      "image": "assets/cards/19-sun.jpg",
       "shortName": {
         "zh-CN": "太阳",
         "en-US": "Sun",
@@ -455,7 +455,7 @@
         "inner critic",
         "ignoring the call"
       ],
-      "image": "assets/cards/20-judgement.png",
+      "image": "assets/cards/20-judgement.jpg",
       "shortName": {
         "zh-CN": "审判",
         "en-US": "Judgement",
@@ -477,7 +477,7 @@
         "shortcuts",
         "delays"
       ],
-      "image": "assets/cards/21-world.png",
+      "image": "assets/cards/21-world.jpg",
       "shortName": {
         "zh-CN": "世界",
         "en-US": "World",
